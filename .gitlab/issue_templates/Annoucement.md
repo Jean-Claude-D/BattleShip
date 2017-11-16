@@ -1,6 +1,6 @@
 # For (Date the announcement is relevant/takes effect)  
 
-# The annoucement  
+# The announcement  
 +    Explain your announcement.  
 
 # Concerned  
