@@ -20,7 +20,7 @@ namespace BattleShip
     /// </summary>
     public partial class ScoreBoard : Page
     {
-        public ScoreBoard()
+        public ScoreBoard(object playerListDB, object game = null)
         {
             InitializeComponent();
         }

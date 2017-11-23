@@ -24,5 +24,20 @@ namespace BattleShip
         {
             InitializeComponent();
         }
+
+        public void goToStartPage()
+        {
+            mainFrame.NavigationService.Navigate(new StartPage());
+        }
+
+        public void goToGame(object boardPlacement)
+        {
+            mainFrame.NavigationService.Navigate(new Game(boardPlacement));
+        }
+
+        public void goToScore(object playerListDB, object lastGame = null)
+        {
+
+        }
     }
 }

@@ -20,9 +20,29 @@ namespace BattleShip
     /// </summary>
     public partial class Game : Page
     {
-        public Game()
+        public Game(Object obj)
         {
             InitializeComponent();
+        }
+
+        private void goToStart()
+        {
+            this.NavigationService.Navigate(new StartPage());
+        }
+
+        private void goToBoatPlacement(object setting)
+        {
+            this.NavigationService.Navigate(new BoardPlacement(setting));
+        }
+
+        private void reset(object game)
+        {
+            this.NavigationService.Navigate(new Game(game));
+        }
+
+        private void goToScore(object playerListDB, object game = null)
+        {
+            this.NavigationService.Navigate(new ScoreBoard(playerListDB, game));
         }
     }
 }
