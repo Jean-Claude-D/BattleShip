@@ -8,67 +8,11 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ScoreBoard" Height="528.107" Width="878.107">
 
-    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
-        <Border  BorderBrush="Black" BorderThickness="2" Margin="39,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-
-            <Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </Border>
-        <Border  BorderBrush="Black" BorderThickness="2" Margin="511,83,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="320" >
-            <Grid x:Name="battleGrid_Copy" ShowGridLines="True" Margin="0" Height="320" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </Border>
-        <TextBlock HorizontalAlignment="Left" Margin="517,429,0,0" TextWrapping="Wrap" Text="Timer" VerticalAlignment="Top" Height="26" Width="62" FontSize="20"/>
-        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,429,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-        <Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="761,36,0,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Height="26" Width="62" FontSize="20" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right"/>
-    </Grid>
+	<Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
+		<Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,429,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
+		<Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26" Click="Button_Click"/>
+		<TextBlock HorizontalAlignment="Left" Margin="51,33,0,0" TextWrapping="Wrap" Text="Wow you suck!       + Score" VerticalAlignment="Top" FontSize="36" Height="66" Width="676"/>
+		<TextBlock HorizontalAlignment="Left" Margin="186,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Height="48" Width="134"><Run Text="Top "/><Run Text="5"/></TextBlock>
+		<TextBlock HorizontalAlignment="Left" Margin="153,194,0,0" TextWrapping="Wrap" Text="top 5 people" VerticalAlignment="Top" FontSize="24"/>
+	</Grid>
 </Page>

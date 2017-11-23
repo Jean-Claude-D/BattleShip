@@ -10,6 +10,6 @@
 
     <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
         <ComboBox HorizontalAlignment="Left" Margin="639,376,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="462,366,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,360,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>
