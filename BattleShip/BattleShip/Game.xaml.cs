@@ -20,7 +20,7 @@ namespace BattleShip
     /// </summary>
     public partial class Game : Page
     {
-        public Game()
+        public Game(Object obj)
         {
             InitializeComponent();
         }

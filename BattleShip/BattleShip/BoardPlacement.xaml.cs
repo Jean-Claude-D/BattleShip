@@ -20,7 +20,7 @@ namespace BattleShip
     /// </summary>
     public partial class BoardPlacement : Page
     {
-        public BoardPlacement()
+        public BoardPlacement(Object obj)
         {
             InitializeComponent();
         }
