@@ -6,10 +6,9 @@
       xmlns:local="clr-namespace:BattleShip"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="StartPage" Height="528.107" Width="878.107">
+      Title="StartPage">
 
-    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
-        <ComboBox HorizontalAlignment="Left" Margin="639,376,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="462,366,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+    <Grid>
+        
     </Grid>
 </Page>
