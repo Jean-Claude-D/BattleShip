@@ -21,9 +21,9 @@ namespace battleship
     public partial class MainWindow : Window
     {
 
-        int posx[1];
-        int posy[1];
-        int moving = 1; //what ship you're moving
+       int [] posx = new int[2];
+        int [] posy = new int[2];
+        int moving = 0; //what ship you're moving
         public MainWindow()
         {
 
@@ -33,47 +33,69 @@ namespace battleship
 
         }
 
+		/*Event for testing purposes
+		 *Summary: Draws
+		 * 
+		 * 
+		 */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             completeclean();
             draw(4, 1, 'X');
-           
-
-
         }
 
+		 private void Button_Click1(object sender, RoutedEventArgs e)
+         {
+           moving=0;
+         }
+		
+		private void Button_Click2(object sender, RoutedEventArgs e)
+         {
+           moving=1;
+         }
 
-        private void left(object sender, KeyEventArgs e)
+		/*Movement event
+		 * Triggered by:  Any key being pressed
+		 * 
+		 * 
+		 * 
+		 */
+        private void movement(object sender, KeyEventArgs e)
         {
 
-            if ((e.Key == Key.Right && posy+1<10)){
+            if ((e.Key == Key.Right && posy[moving]+1<10)){
                 clear(e.Key);
-                posy++;
+                posy[moving]++;
                 draw(4,1, 'X');
             }
-            else if ((e.Key == Key.Left && posy>0))
+            else if ((e.Key == Key.Left && posy[moving]>0))
             {
                 clear(e.Key);
-                posy--;
+                posy[moving]--;
                 draw(4, 1, 'X');
             }
-            else if ((e.Key == Key.Down && posx+4<10))
+            else if ((e.Key == Key.Down && posx[moving]+4<10))
             {
                 clear(e.Key);
-                posx++;
+                posx[moving]++;
                 draw(4, 1, 'X');
             }
-            else if ((e.Key == Key.Up && posx > 0))
+            else if ((e.Key == Key.Up && posx[moving] > 0))
             {
                 clear(e.Key);
-                posx--;
+                posx[moving]--;
                 draw(4, 1,'X');
             }
 
         }
 
 
-
+		/*Void, no params
+		 *Summary: Cleans the grid, replacing any label by ""
+		 * 
+		 * 
+		 * 
+		 */
         private void completeclean()
         {
             for (int i = 0; i < 10; i++)
@@ -92,7 +114,11 @@ namespace battleship
                 }
             }
         }
-
+		
+		/*void no params
+		 *Summary: Cleans the place where the boat was previously on
+		 * 
+		 */
         private void clear(Key direction)
         {
 
@@ -103,7 +129,12 @@ namespace battleship
 
       
 
-
+		/*Params: int width: Width of the boat we're drawing
+		 *		  int length: Length of the boat we're drawing
+		 *		  char a: char we are going to draw inside the label
+		 *Summary: Cleans the place where the boat was previously on
+		 * 
+		 */
         private void draw(int width, int length, char a)
         {
             for (int i = 0; i < width; i++)
@@ -113,14 +144,17 @@ namespace battleship
                 {
                     Label dynamicLabel = new Label();
                     battleGrid.Children.Add(dynamicLabel);
-                    Grid.SetRow(dynamicLabel, i+posx);
-                    Grid.SetColumn(dynamicLabel,j+posy);
+                    Grid.SetRow(dynamicLabel, i+posx[moving]);
+                    Grid.SetColumn(dynamicLabel,j+posy[moving]);
 
-                    ((Label)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i+posx && Grid.GetColumn(f) == j+posy)).Content =a;
+                    ((Label)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i+posx[moving] && Grid.GetColumn(f) == j+posy[moving])).Content =a;
               
                 }
             }
         }
+
+
+
 
     }
 }

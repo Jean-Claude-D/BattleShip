@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:battleship"
         mc:Ignorable="d"
-        Title="MainWindow" Height="928" Width="1138" KeyDown="left">
+        Title="MainWindow" Height="928" Width="1138" KeyDown="movement">
     <Grid Margin="0,0,-452,-584">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275*"/>
@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
         </Grid>
         <Button Content="Place Ships" HorizontalAlignment="Left" Margin="32,48,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>
-        <Button Content="Move Ship 1" HorizontalAlignment="Left" Margin="32,127,0,0" VerticalAlignment="Top" Width="99"/>
-        <Button Content="Move Ship 2" HorizontalAlignment="Left" Margin="32,183,0,0" VerticalAlignment="Top" Width="99"/>
+        <Button Content="Move Ship 1" HorizontalAlignment="Left" Margin="32,127,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click1"/>
+        <Button Content="Move Ship 2" HorizontalAlignment="Left" Margin="32,183,0,0" VerticalAlignment="Top" Width="99" Click ="Button_Click2"/>
     </Grid>
 </Window>
