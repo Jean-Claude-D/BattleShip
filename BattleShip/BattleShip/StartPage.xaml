@@ -8,8 +8,11 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="StartPage" Height="528.107" Width="878.107">
 
-    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
-        <ComboBox HorizontalAlignment="Left" Margin="639,376,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,360,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
+    <Grid SnapsToDevicePixels="True" ClipToBounds="True" OpacityMask="Black" Background="#FF000019">
+
+        <Button x:Name="sendBtn" Content="Send" HorizontalAlignment="Left" Margin="559,334,0,0" VerticalAlignment="Top" Width="75" Click="sendBtn_Click"/>
+        <TextBox x:Name="nameTxt" HorizontalAlignment="Left" Height="22" Margin="226,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328" Background="Black" Foreground="White" FontFamily="OCR A Std" FontSize="14"/>
+        <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="226,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="92" Width="408" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
+      
     </Grid>
 </Page>

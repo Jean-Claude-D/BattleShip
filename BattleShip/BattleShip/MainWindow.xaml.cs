@@ -23,6 +23,7 @@ namespace BattleShip
         public MainWindow()
         {
             InitializeComponent();
+            goToStartPage();
         }
 
         public void goToStartPage()
@@ -39,5 +40,5 @@ namespace BattleShip
         {
 
         }
-    }
+	}
 }

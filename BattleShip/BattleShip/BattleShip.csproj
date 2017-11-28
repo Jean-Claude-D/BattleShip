@@ -54,11 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Animations.cs" />
     <Compile Include="ScoreBoard.xaml.cs">
       <DependentUpon>ScoreBoard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StartPage - Copy.xaml.cs">
-      <DependentUpon>StartPage - Copy.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -90,10 +88,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ScoreBoard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="StartPage - Copy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

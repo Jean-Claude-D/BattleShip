@@ -8,11 +8,8 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ScoreBoard" Height="528.107" Width="878.107">
 
-	<Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="White">
+	<Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000017">
 		<Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,429,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-		<Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26" Click="Button_Click"/>
-		<TextBlock HorizontalAlignment="Left" Margin="51,33,0,0" TextWrapping="Wrap" Text="Wow you suck!       + Score" VerticalAlignment="Top" FontSize="36" Height="66" Width="676"/>
-		<TextBlock HorizontalAlignment="Left" Margin="186,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Height="48" Width="134"><Run Text="Top "/><Run Text="5"/></TextBlock>
-		<TextBlock HorizontalAlignment="Left" Margin="153,194,0,0" TextWrapping="Wrap" Text="top 5 people" VerticalAlignment="Top" FontSize="24"/>
-	</Grid>
+		<Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26"/>
+    </Grid>
 </Page>
