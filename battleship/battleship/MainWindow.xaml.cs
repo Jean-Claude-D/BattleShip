@@ -40,7 +40,7 @@ namespace battleship
 		 */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            completeclean();
+         
             draw(4, 1, 'X');
         }
 
@@ -54,39 +54,46 @@ namespace battleship
            moving=1;
          }
 
+
 		/*Movement event
 		 * Triggered by:  Any key being pressed
-		 * 
-		 * 
+		 * Summary: Checks if it's a valid movement,
+		 * then erases where it currently is
+		 * then draws itself in the next position 
 		 * 
 		 */
         private void movement(object sender, KeyEventArgs e)
         {
+			if (isvalid(e.Key))
+			{
 
-            if ((e.Key == Key.Right && posy[moving]+1<10)){
-                clear(e.Key);
-                posy[moving]++;
-                draw(4,1, 'X');
-            }
-            else if ((e.Key == Key.Left && posy[moving]>0))
-            {
-                clear(e.Key);
-                posy[moving]--;
-                draw(4, 1, 'X');
-            }
-            else if ((e.Key == Key.Down && posx[moving]+4<10))
-            {
-                clear(e.Key);
-                posx[moving]++;
-                draw(4, 1, 'X');
-            }
-            else if ((e.Key == Key.Up && posx[moving] > 0))
-            {
-                clear(e.Key);
-                posx[moving]--;
-                draw(4, 1,'X');
-            }
-
+				
+					if (e.Key == Key.Right) 
+					{
+						clear(e.Key);
+						posy[moving]++;
+						draw(4, 1, 'X');
+					}
+                       else if (e.Key == Key.Left)
+					{
+						clear(e.Key);
+						posy[moving]--;
+						draw(4, 1, 'X');
+					}
+					else if (e.Key == Key.Down)
+					{
+						clear(e.Key);
+						posx[moving]++;
+						draw(4, 1, 'X');
+					}
+					else if (e.Key == Key.Up)
+					{
+						clear(e.Key);
+						posx[moving]--;
+						draw(4, 1, 'X');
+					}
+				
+			}
         }
 
 
@@ -153,6 +160,72 @@ namespace battleship
             }
         }
 
+
+
+		private Boolean isvalid(Key key)
+		{
+			
+			if (key == Key.Right)
+			{
+				if (posy[moving] + 1 >= 10) return false;
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if (i != moving && posy[moving] + 1 == posy[i])
+					{
+						if (posx[moving] + 4 > posx[i] || posx[i] + 4 < posx[moving])
+							return false;
+					}
+				}
+
+
+
+			}
+
+			else if (key == Key.Left )
+			{
+				if (posy[moving] <= 0) return false;
+
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if (i != moving && posy[moving] - 1 == posy[i])
+					{
+						if (posx[moving]+4 > posx[i] || posx[i]+4<posx[moving])
+						return false;
+
+					}
+				}
+			}
+
+			else if (key == Key.Down)
+			{
+				if (posx[moving] + 4 >= 10) return false;
+
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if (i != moving && posx[moving] + 4 >= posx[i] && posy[moving] == posy[i])
+					{
+						return false;
+					}
+				}
+			}
+
+			else if (key== Key.Up )
+			{
+				if (posx[moving] <= 0) return false;
+
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if (i != moving && posx[moving] - 1 <= posx[i] + 4 && posy[moving] ==posy[i] )
+					{
+						return false;
+					}
+				}
+
+			}
+
+			return true;
+			
+		}
 
 
 
