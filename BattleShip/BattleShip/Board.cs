@@ -34,17 +34,20 @@ namespace BattleShip
         {
             foreach(Square ShipS in toPlace.position)
             {
-                for(int ji = 0, j = 0, i = 0; ji < this.squares.Length; ji++, j = (int)(ji / 10), i = ji - j)
+                for (int i = 0; i < this.squares.GetLength(0); i++)
                 {
-                    if(ShipS.Equals(this.squares[j, i]))
+                    for (int j = 0; j < this.squares.GetLength(1); j++)
                     {
-                        if(this.squares[j, i].isShip())
+                        if (ShipS.Equals(this.squares[j, i]))
                         {
-                            throw new ArgumentException("Cannot put Ship at :\n" + this.squares[j, i].ToString());
-                        }
-                        else
-                        {
-                            this.squares[j, i] = ShipS;
+                            if (this.squares[j, i].isShip())
+                            {
+                                throw new ArgumentException("Cannot put Ship at :\n" + this.squares[j, i].ToString());
+                            }
+                            else
+                            {
+                                this.squares[j, i] = ShipS;
+                            }
                         }
                     }
                 }
@@ -74,8 +77,8 @@ namespace BattleShip
             {
                 for (int j = 0; j < this.squares.GetLength(1); j++)
                 {
-                    bool ship = this.squares[i, j].isShip();
-                    bool shot = this.squares[i, j].isShot();
+                    bool ship = this.squares[j, i].isShip();
+                    bool shot = this.squares[j, i].isShot();
 
                     if(!ship && !shot)
                     {
@@ -91,7 +94,7 @@ namespace BattleShip
                     }
                     else
                     {
-                        if(this.squares[i, j].hasShipSunk())
+                        if(this.squares[j, i].hasShipSunk())
                         {
                             toReturn += "[-]";
                         }

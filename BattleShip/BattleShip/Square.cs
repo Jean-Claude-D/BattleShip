@@ -10,7 +10,7 @@ namespace BattleShip
     {
         private readonly int xCoordinate;
         private readonly int yCoordinate;
-        private readonly Ship shipThere;
+        private Ship shipThere;
         private bool hasBeenShot;
 
         public Square(int xCoordinate, int yCoordinate) : this(xCoordinate, yCoordinate, null) { }
@@ -42,6 +42,13 @@ namespace BattleShip
             this.yCoordinate = square.yCoordinate;
             this.shipThere = square.shipThere;
             this.hasBeenShot = square.hasBeenShot;
+        }
+
+        public Square placeShipOnto(Ship ship)
+        {
+            Square toReturn = new Square(this);
+            toReturn.shipThere = ship;
+            return toReturn;
         }
 
         public int getX()

@@ -21,7 +21,7 @@ namespace BattleShip
             this.position = new Square[position.Length];
             for(int i = 0; i < this.position.Length; i++)
             {
-                this.position[i] = position[i];
+                this.position[i] = position[i].placeShipOnto(this);
             }
 
             this.isSunk = false;
@@ -50,7 +50,7 @@ namespace BattleShip
         {
             for(int i = 0; i < this.position.Length; i++)
             {
-                if(this.position[i].isShot())
+                if(!this.position[i].isShot())
                 {
                     return;
                 }

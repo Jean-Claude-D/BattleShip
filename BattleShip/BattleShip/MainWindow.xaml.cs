@@ -27,6 +27,13 @@ namespace BattleShip
             Console.Write(b.ToString());
             b.shoot(new Square(6, 7));
             Console.Write(b.ToString());
+            Square[] a = { new Square(0, 0), new Square(0, 1)};
+            b.placeShip(new Ship(a));
+            Console.Write(b.ToString());
+            b.shoot(new Square(0, 0));
+            Console.Write(b.ToString());
+            b.shoot(new Square(0, 1));
+            Console.Write(b.ToString());
         }
 
         public void goToStartPage()
