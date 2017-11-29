@@ -54,5 +54,16 @@ namespace BattleShip
                 + "Which level would you like to play this time?";
             Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
         }
-    }
+		/**
+		 * Text displayed after a player enters their name if they're new.
+		 * 
+		 * @author karina
+		 **/
+		public static void newName(TextBlock msgTxt, string name)
+		{
+			string text = "Hi" + name + "\n"
+				+ "something something new person?";
+			Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
+		}
+	}
 }
