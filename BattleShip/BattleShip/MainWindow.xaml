@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BattleShip"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="528.107" Width="878.107">
+        Title="MainWindow"  Height="528.107" Width="878.107" MaxWidth="878.107" MaxHeight="528.107" MinWidth="878.107" MinHeight="528.107">
 
 	<Grid x:Name="maingrid" >
 		<Frame x:Name="mainFrame" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="870"/>

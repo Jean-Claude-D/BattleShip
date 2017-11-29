@@ -68,9 +68,9 @@
         <Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26" />
         <TextBlock HorizontalAlignment="Left" Margin="507,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="320" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="Where should we hide the ships captain?"/>
         <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,429,0,0" VerticalAlignment="Top" Width="87" Height="26"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="45" Margin="331,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="132"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="45" Margin="81,332,0,0" Stroke="Black" VerticalAlignment="Top" Width="126"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="43" Margin="228,269,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="331,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="132"/>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="81,332,0,0" Stroke="Black" VerticalAlignment="Top" Width="126"/>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="43" Margin="228,269,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -80,7 +80,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="-44,122,0,0" Stroke="Black" VerticalAlignment="Top" Width="208" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="44" Margin="-44,122,0,0" Stroke="Black" VerticalAlignment="Top" Width="208" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -90,7 +90,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="396,397,0,0" Stroke="Black" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="44" Margin="396,397,0,0" Stroke="Black" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
