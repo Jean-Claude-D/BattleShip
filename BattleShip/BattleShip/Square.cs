@@ -94,5 +94,14 @@ namespace BattleShip
                 + ((this.isShip())?(""):("No ")) + "Ship there\n"
                 + "Has " + ((this.hasBeenShot)?(""):("not")) + "been shot";
         }
+
+        public bool hasShipSunk()
+        {
+            if(!this.isShip())
+            {
+                throw new NotSupportedException("There is no ship there");
+            }
+            return this.shipThere.getIsSunk();
+        }
     }
 }

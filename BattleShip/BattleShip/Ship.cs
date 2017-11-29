@@ -59,6 +59,11 @@ namespace BattleShip
             this.isSunk = true;
         }
 
+        public bool getIsSunk()
+        {
+            return this.isSunk;
+        }
+
         public override string ToString()
         {
             String positions = "";

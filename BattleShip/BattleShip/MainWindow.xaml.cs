@@ -23,6 +23,10 @@ namespace BattleShip
         public MainWindow()
         {
             InitializeComponent();
+            Board b = new Board();
+            Console.Write(b.ToString());
+            b.shoot(new Square(6, 7));
+            Console.Write(b.ToString());
         }
 
         public void goToStartPage()
