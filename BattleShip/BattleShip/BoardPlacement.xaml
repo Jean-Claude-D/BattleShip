@@ -70,7 +70,7 @@
         <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,429,0,0" VerticalAlignment="Top" Width="87" Height="26"/>
         <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="331,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="132"/>
         <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="81,332,0,0" Stroke="Black" VerticalAlignment="Top" Width="126"/>
-        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="43" Margin="228,269,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="43" Margin="269,270,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

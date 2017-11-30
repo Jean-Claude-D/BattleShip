@@ -13,8 +13,8 @@
         <Button x:Name="sendBtn" Content="Send" HorizontalAlignment="Left" Margin="559,334,0,0" VerticalAlignment="Top" Width="75" Click="sendBtn_Click"/>
         <TextBox x:Name="nameTxt" HorizontalAlignment="Left" Height="22" Margin="226,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328" Background="#FF000019" Foreground="White" FontFamily="OCR A Std" FontSize="14"/>
         <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="226,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="92" Width="408" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
-		<Button x:Name="continueBtn" Content="Continue" HorizontalAlignment="Left" Margin="479,336,0,0" VerticalAlignment="Top" Width="75" Click="continueBtn_Click" RenderTransformOrigin="-1.2,0.55"/>
-		<Button x:Name="newBtn" Content="New Game" HorizontalAlignment="Left" Margin="559,336,0,0" VerticalAlignment="Top" Width="75" Click="newBtn_Click"/>
+		<Button x:Name="continueBtn" Content="Continue" HorizontalAlignment="Left" Margin="479,334,0,0" VerticalAlignment="Top" Width="75" Click="continueBtn_Click" RenderTransformOrigin="-1.2,0.55"/>
+		<Button x:Name="newBtn" Content="New Game" HorizontalAlignment="Left" Margin="559,334,0,0" VerticalAlignment="Top" Width="75" Click="newBtn_Click"/>
 
 	</Grid>
 </Page>
