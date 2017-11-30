@@ -148,5 +148,18 @@ namespace BattleShip
         {
             return this.squares;
         }
+
+        /**
+         * Helper method for AI to know where to shoot
+         * Checks if a square has been shot, if there's a ship there 
+         * and if it's sunk
+         * 
+         * @author Karina
+         * @return boolean
+         **/ 
+        public bool IsShipShotNotSunk(int i, int j)
+        {
+            return squares[i, j].isShot() && squares[i, j].isShip() && !squares[i, j].hasShipSunk();
+        }
     }
 }
