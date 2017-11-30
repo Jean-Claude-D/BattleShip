@@ -256,7 +256,7 @@ namespace battleship
              
            if (tempwidth<templength)
            {
-                if (isvalid(Key.Right))
+                if (isInside(Key.Right))
                 {
                   draw(length[moving], width[moving], 'X');
                 }
@@ -272,7 +272,7 @@ namespace battleship
            } 
            else if (tempwidth>templength)
            {
-               if (isvalid((Key.Down)))
+               if (isInside(Key.Down))
                {
                 draw(length[moving], width[moving], 'X');
                }
@@ -298,9 +298,12 @@ namespace battleship
 
 				for (int i = 0; i < posy.Length; i++)
 				{
+					if ( posx[moving]+length[moving] <= posx[i] || posx[moving] >= posx[i] + length[i]) return true;
+
                     for (int j=0; j< width[moving];j++)
                     {
-                        if (j>= posy[i]+1 && j <= posy[i] + width[i]) 
+						//MessageBox.Show(j +" + " + posy[moving]+ " >= " + posy[i]+" + " + 1 + " && "+ j +" + " + posy[moving] + " <= " + posy[i] +" + " + width[i] );
+                        if (j + posy[moving]>= posy[i] && j + posy[moving] <= posy[i] + width[i] && i != moving) 
                         return false;
                     }
 
@@ -309,8 +312,29 @@ namespace battleship
                 }
 
             }
-            return true;
+			else if (key == Key.Down)
+				{
+				if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
 
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if ( posy[moving]+width[moving] <= posy[i] || posy[moving] >= posy[i] + width[i]) return true;
+
+                    for (int j=0; j< length[moving];j++)
+                    {
+
+						//MessageBox.Show(j +" + " + posx[moving]+ " >= " + posx[i]+" + " + " && "+ j +" + " + posx[moving] + " <= " + posx[i] +" + " + length[i] );
+                        if (j + posx[moving]>= posx[i] && j + posx[moving] <= posx[i] + length[i] && i != moving) 
+                        return false;
+                    }
+
+
+
+                }
+
+            }
+          
+			return true;
         }      
 
 
