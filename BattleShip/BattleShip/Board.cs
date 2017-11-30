@@ -11,7 +11,7 @@ namespace BattleShip
     {
         /* 2D array of all the squares */
         private Square[,] squares;
-
+        int available = 100;
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/
@@ -60,7 +60,9 @@ namespace BattleShip
             {
                 if(s.Equals(square))
                 {
-                    return s.shoot();
+                    Boolean shot = s.shoot();
+                    available--;
+                    return shot;
                 }
             }
 
@@ -107,6 +109,44 @@ namespace BattleShip
                 toReturn += '\n';
             }
             return toReturn + "------------------------------\n";
+        }
+
+        /**
+         * Get's available moves for the AI
+         * WARNING!! NOT DEEP COPY, BE CAREFUL
+         * 
+         * @author Karina
+         * @returns Square[] available moves
+         **/ 
+        public Square[] AvailableMoves()
+        {
+            Square[] avail = new Square[available];
+            int k = 0;
+
+            for (int i = 0; i < this.squares.Length; i++ )
+            {
+                for (int j = 0; j < this.squares.Length; j++)
+                {
+                    if (!this.squares[i,j].isShot())
+                    {
+                        avail[k] = this.squares[i,j];
+                        k++;
+                    }
+                }
+            }
+            return avail;
+        }
+
+        /**
+         * Get's all squares for the AI
+         * WARNING!! NOT DEEP COPY, BE CAREFUL
+         * 
+         * @author Karina
+         * @returns Square[]
+         **/
+        public Square[,] AllSquares()
+        {
+            return this.squares;
         }
     }
 }

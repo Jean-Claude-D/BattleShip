@@ -54,11 +54,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ai.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="BoardLimit.cs" />
+    <Compile Include="Easy.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Hard.cs" />
+    <Compile Include="Medium.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="ScoreBoard.xaml.cs">
       <DependentUpon>ScoreBoard.xaml</DependentUpon>
     </Compile>
