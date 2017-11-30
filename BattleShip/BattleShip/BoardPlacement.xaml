@@ -5,10 +5,100 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BattleShip"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="BoardPlacement">
-
-    <Grid>
-        
+      d:DesignHeight="300"
+      Title="BoardPlacement" Height="528.107" Width="878.107">
+    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000019">
+        <Border  BorderBrush="Black" BorderThickness="2" Margin="37,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0A0036" >
+            <Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <Border  BorderBrush="Black" BorderThickness="2" Margin="507,37,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="320" >
+            <Grid x:Name="battleGrid_Copy" ShowGridLines="True" Margin="0" Height="320" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Background="#FF0A0036">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,429,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="615,429,0,0" VerticalAlignment="Top" Width="94" Height="26" />
+        <TextBlock HorizontalAlignment="Left" Margin="507,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="320" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="Where should we hide the ships captain?"/>
+        <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,429,0,0" VerticalAlignment="Top" Width="87" Height="26"/>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="331,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="132"/>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="45" Margin="81,332,0,0" Stroke="Black" VerticalAlignment="Top" Width="126"/>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="43" Margin="228,269,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="44" Margin="-44,122,0,0" Stroke="Black" VerticalAlignment="Top" Width="208" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="#FF515151" HorizontalAlignment="Left" Height="44" Margin="396,397,0,0" Stroke="Black" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
     </Grid>
 </Page>
