@@ -23,14 +23,17 @@ namespace battleship
 
        int [] posx = new int[2];
         int [] posy = new int[2];
+        int [] length = new int[2];
+        int [] width = new int[2];
         int moving = 0; //what ship you're moving
         public MainWindow()
         {
 
             InitializeComponent();
-
-         
-
+            width[0] = 1;
+            width[1] = 1;
+            length[0] = 3;
+            length[1] = 2;
         }
 
 		/*Event for testing purposes
@@ -40,8 +43,9 @@ namespace battleship
 		 */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-         
-            draw(4, 1, 'X');
+
+          
+            draw(length[moving], width[moving], 'X');
         }
 
 		 private void Button_Click1(object sender, RoutedEventArgs e)
@@ -70,28 +74,28 @@ namespace battleship
 				
 					if (e.Key == Key.Right) 
 					{
-						clear(e.Key);
+						clear();
 						posy[moving]++;
-						draw(4, 1, 'X');
-					}
+                        draw(length[moving], width[moving], 'X');
+                     }
                        else if (e.Key == Key.Left)
-					{
-						clear(e.Key);
+					   {
+						clear();
 						posy[moving]--;
-						draw(4, 1, 'X');
-					}
+                        draw(length[moving], width[moving], 'X');
+                       }
 					else if (e.Key == Key.Down)
 					{
-						clear(e.Key);
+						clear();
 						posx[moving]++;
-						draw(4, 1, 'X');
-					}
+                         draw(length[moving], width[moving], 'X');
+                    }
 					else if (e.Key == Key.Up)
 					{
-						clear(e.Key);
+						clear();
 						posx[moving]--;
-						draw(4, 1, 'X');
-					}
+                        draw(length[moving], width[moving], 'X');
+                    }
 				
 			}
         }
@@ -126,11 +130,11 @@ namespace battleship
 		 *Summary: Cleans the place where the boat was previously on
 		 * 
 		 */
-        private void clear(Key direction)
+        private void clear()
         {
 
-            draw(4, 1, ' ');
-           
+            draw(length[moving], width[moving], ' ');
+
         }
 
 
@@ -167,12 +171,12 @@ namespace battleship
 			
 			if (key == Key.Right)
 			{
-				if (posy[moving] + 1 >= 10) return false;
+				if (posy[moving] + width[moving] >= 10) return false;
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posy[moving] + 1 == posy[i])
+					if (i != moving && posy[moving] + width[moving] == posy[i])
 					{
-						if (posx[moving]>=posx[i] && posx[moving]<posx[i]+4 || posx[i] >= posx[moving] && posx[i] < posx[moving]+4)
+						if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving]+length[moving])
 							return false;
 					}
 				}
@@ -187,9 +191,9 @@ namespace battleship
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posy[moving] - 1 == posy[i])
+					if (i != moving && posy[moving] - width[moving] == posy[i])
 					{
-                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + 4 || posx[i] >= posx[moving] && posx[i] < posx[moving] + 4)
+                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving] + length[moving])
 
                             return false;
 
@@ -199,11 +203,11 @@ namespace battleship
 
 			else if (key == Key.Down)
 			{
-				if (posx[moving] + 4 >= 10) return false;
+				if (posx[moving] +length[moving] >= 10) return false;
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posx[moving] + 4 >= posx[i] && posy[moving] == posy[i])
+					if (i != moving && posx[moving] + length[moving] >= posx[i] && posy[moving] == posy[i])
 					{
 						return false;
 					}
@@ -216,7 +220,7 @@ namespace battleship
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posx[moving] - 1 <= posx[i] + 4 && posy[moving] ==posy[i] )
+					if (i != moving && posx[moving] - width[moving] <= posx[i] + length[moving] && posy[moving] ==posy[i] )
 					{
 						return false;
 					}
@@ -228,7 +232,14 @@ namespace battleship
 			
 		}
 
+        private void Rotation_Click(object sender, RoutedEventArgs e)
+        {
+            clear();
+            int temp = length[moving];
+            length[moving] = width[moving];
+            width[moving] = temp;
+            draw(length[moving], width[moving], 'X');
 
-
+        }
     }
 }
