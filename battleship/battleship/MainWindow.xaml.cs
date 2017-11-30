@@ -172,7 +172,7 @@ namespace battleship
 				{
 					if (i != moving && posy[moving] + 1 == posy[i])
 					{
-						if (posx[moving] + 4 > posx[i] || posx[i] + 4 < posx[moving])
+						if (posx[moving]>=posx[i] && posx[moving]<posx[i]+4 || posx[i] >= posx[moving] && posx[i] < posx[moving]+4)
 							return false;
 					}
 				}
@@ -189,8 +189,9 @@ namespace battleship
 				{
 					if (i != moving && posy[moving] - 1 == posy[i])
 					{
-						if (posx[moving]+4 > posx[i] || posx[i]+4<posx[moving])
-						return false;
+                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + 4 || posx[i] >= posx[moving] && posx[i] < posx[moving] + 4)
+
+                            return false;
 
 					}
 				}
