@@ -171,11 +171,13 @@ namespace battleship
 			
 			if (key == Key.Right)
 			{
-				if (posy[moving] + width[moving] >= 10) return false;
+				if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
 				for (int i = 0; i < posy.Length; i++)
 				{
+                    //Checks if it's directly to the left of a ship
 					if (i != moving && posy[moving] + width[moving] == posy[i])
 					{
+                          //Test if it's in the vertical range of the ship next to it
 						if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving]+length[moving])
 							return false;
 					}
@@ -187,13 +189,14 @@ namespace battleship
 
 			else if (key == Key.Left )
 			{
-				if (posy[moving] <= 0) return false;
+				if (posy[moving] <= 0) return false; //If it's at the left edge, then it's invalid
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posy[moving] - width[moving] == posy[i])
+					if (i != moving && posy[moving] == posy[i]+width[i])//Checks if it's directly to the right of a ship
 					{
-                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving] + length[moving])
+                        //Test if it's in the vertical range of the ship next to it
+                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving] + length[moving]) 
 
                             return false;
 
@@ -203,27 +206,35 @@ namespace battleship
 
 			else if (key == Key.Down)
 			{
-				if (posx[moving] +length[moving] >= 10) return false;
+				if (posx[moving] +length[moving] >= 10) return false; //If it's at the bottom, then it's invalid
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posx[moving] + length[moving] >= posx[i] && posy[moving] == posy[i])
+					if (i != moving && posx[moving] + length[moving] == posx[i])//Checks if it's directly above a ship
 					{
+                       
+                        if (posy[moving] + width[moving]  >= posy[i]+1 && posy[moving] + 1 <= posy[i] + width[i] ) //Test if it's in the range of the ship below
 						return false;
+                      
 					}
 				}
 			}
+            
 
 			else if (key== Key.Up )
 			{
-				if (posx[moving] <= 0) return false;
+				if (posx[moving] <= 0) return false;//If it's at the top, then it's invalid
 
 				for (int i = 0; i < posy.Length; i++)
 				{
-					if (i != moving && posx[moving] - width[moving] <= posx[i] + length[moving] && posy[moving] ==posy[i] )
+					if (i != moving &&  posx[moving] == posx[i]+length[i])//Checks if it's directly below a ship
 					{
+                       
+                        if (posy[moving] + width[moving]  >= posy[i]+1 && posy[moving] + 1 <= posy[i] + width[i] ) //Test if it's in the range of the ship above
 						return false;
+                      
 					}
+
 				}
 
 			}
@@ -235,11 +246,74 @@ namespace battleship
         private void Rotation_Click(object sender, RoutedEventArgs e)
         {
             clear();
-            int temp = length[moving];
-            length[moving] = width[moving];
-            width[moving] = temp;
-            draw(length[moving], width[moving], 'X');
+            //Original mesurements
+            int templength = length[moving]; 
+            int tempwidth = width[moving];
+
+           length[moving] = tempwidth;
+            width[moving] = templength;
+
+             
+           if (tempwidth<templength)
+           {
+                if (isvalid(Key.Right))
+                {
+                  draw(length[moving], width[moving], 'X');
+                }
+                else
+                {
+                
+                length[moving] = templength;
+                  width[moving] = tempwidth;
+                    draw(length[moving], width[moving], 'X');
+                }
+
+
+           } 
+           else if (tempwidth>templength)
+           {
+               if (isvalid((Key.Down)))
+               {
+                draw(length[moving], width[moving], 'X');
+               }
+               else 
+               {
+                
+                length[moving] = templength;
+                  width[moving] = tempwidth;
+                    draw(length[moving], width[moving], 'X');
+               }
+           }
+            
+          
 
         }
+
+        public Boolean isInside(Key key)
+        {
+            if (key == Key.Right)
+            {
+
+            if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
+
+				for (int i = 0; i < posy.Length; i++)
+				{
+                    for (int j=0; j< width[moving];j++)
+                    {
+                        if (j>= posy[i]+1 && j <= posy[i] + width[i]) 
+                        return false;
+                    }
+
+
+
+                }
+
+            }
+            return true;
+
+        }      
+
+
+
     }
 }
