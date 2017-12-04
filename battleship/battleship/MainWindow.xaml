@@ -11,7 +11,9 @@
             <ColumnDefinition Width="275*"/>
             <ColumnDefinition Width="1191*"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="battleGrid" HorizontalAlignment="Left" Height="600" Margin="234.5,39.5,0,0" VerticalAlignment="Top" Width="800" UseLayoutRounding="False" ShowGridLines="True" Grid.ColumnSpan="2">
+        <Grid x:Name="battleGrid" HorizontalAlignment="Left" Height="600" Margin="234.5,39.5,0,0" 
+              VerticalAlignment="Top" Width="800" UseLayoutRounding="False" ShowGridLines="True"
+              Grid.ColumnSpan="2" PreviewMouseLeftButtonDown="click">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -37,9 +39,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
         </Grid>
-        <Button Content="Place Ships" HorizontalAlignment="Left" Margin="32,48,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>
         <Button Content="Move Ship 1" HorizontalAlignment="Left" Margin="32,127,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click1"/>
         <Button Content="Move Ship 2" HorizontalAlignment="Left" Margin="32,183,0,0" VerticalAlignment="Top" Width="99" Click ="Button_Click2"/>
         <Button x:Name="Rotation" Content="Rotate Ship" HorizontalAlignment="Left" Margin="32,92,0,0" VerticalAlignment="Top" Width="99" Click="Rotation_Click"/>
+        <Button x:Name="reset" Content="Reset Board" HorizontalAlignment="Left" Margin="32,231,0,0" VerticalAlignment="Top" Width="99" Click="reset_Click"/>
     </Grid>
 </Window>

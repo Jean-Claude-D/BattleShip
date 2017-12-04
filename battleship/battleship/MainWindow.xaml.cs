@@ -21,19 +21,31 @@ namespace battleship
     public partial class MainWindow : Window
     {
 
-       int [] posx = new int[2];
-        int [] posy = new int[2];
-        int [] length = new int[2];
-        int [] width = new int[2];
+       int [] posy = new int[5];
+        int [] posx = new int[5];
+        int [] length = new int[5];
+        int [] width = new int[5];
         int moving = 0; //what ship you're moving
+
         public MainWindow()
         {
 
             InitializeComponent();
-            width[0] = 1;
-            width[1] = 1;
-            length[0] = 3;
-            length[1] = 2;
+
+          for (int i=0;i<5;i++)
+            {
+                width[i] = 1;
+                posy[i] = 0;
+                posx[i] = 0;
+
+            }
+            length[0] = 5;
+            length[1] = 4;
+            length[2] = 3;
+            length[3] = 3;
+            length[4] = 2;
+            randomize();
+
         }
 
 		/*Event for testing purposes
@@ -41,13 +53,12 @@ namespace battleship
 		 * 
 		 * 
 		 */
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+      
 
-          
-            draw(length[moving], width[moving], 'X');
-        }
-
+        /*Temporary event things
+         * 
+         * 
+         */
 		 private void Button_Click1(object sender, RoutedEventArgs e)
          {
            moving=0;
@@ -58,8 +69,48 @@ namespace battleship
            moving=1;
          }
 
+        /*Event: Click
+         *Summary: A lot of code stoled that find the row and column 
+         * of a grid space when it's clicked
+         * 
+         */
+        private void click(object sender, MouseButtonEventArgs e)
+        {
+            var point = Mouse.GetPosition(battleGrid);
 
-		/*Movement event
+            int row = 0;
+            int col = 0;
+            double accumulatedHeight = 0.0;
+            double accumulatedWidth = 0.0;
+
+            // calc row mouse was over
+            foreach (var rowDefinition in battleGrid.RowDefinitions)
+            {
+                accumulatedHeight += rowDefinition.ActualHeight;
+                if (accumulatedHeight >= point.Y)
+                    break;
+                row++;
+            }
+
+            // calc col mouse was over
+            foreach (var columnDefinition in battleGrid.ColumnDefinitions)
+            {
+                accumulatedWidth += columnDefinition.ActualWidth;
+                if (accumulatedWidth >= point.X)
+                    break;
+                col++;
+            }
+            rotate(findShip(row,col));
+
+        }
+
+        private void reset_Click(object sender, RoutedEventArgs e)
+        {
+            completeClean();
+            randomize();
+        }
+
+        /*Movement event
 		 * Triggered by:  Any key being pressed
 		 * Summary: Checks if it's a valid movement,
 		 * then erases where it currently is
@@ -68,46 +119,143 @@ namespace battleship
 		 */
         private void movement(object sender, KeyEventArgs e)
         {
-			if (isvalid(e.Key))
-			{
+            if (isvalid(e.Key))
+            {
 
-				
-					if (e.Key == Key.Right) 
-					{
-						clear();
-						posy[moving]++;
-                        draw(length[moving], width[moving], 'X');
-                     }
-                       else if (e.Key == Key.Left)
-					   {
-						clear();
-						posy[moving]--;
-                        draw(length[moving], width[moving], 'X');
-                       }
-					else if (e.Key == Key.Down)
-					{
-						clear();
-						posx[moving]++;
-                         draw(length[moving], width[moving], 'X');
-                    }
-					else if (e.Key == Key.Up)
-					{
-						clear();
-						posx[moving]--;
-                        draw(length[moving], width[moving], 'X');
-                    }
-				
-			}
+
+                if (e.Key == Key.Right)
+                {
+                    clear();
+                    posx[moving]++;
+                    draw(moving, 'X');
+                }
+                else if (e.Key == Key.Left)
+                {
+                    clear();
+                    posx[moving]--;
+                    draw(moving, 'X');
+                }
+                else if (e.Key == Key.Down)
+                {
+                    clear();
+                    posy[moving]++;
+                    draw(moving, 'X');
+                }
+                else if (e.Key == Key.Up)
+                {
+                    clear();
+                    posy[moving]--;
+                    draw(moving, 'X');
+                }
+
+            }
         }
 
+        /*Rotation event
+		 * Triggered by:  Button being pressed
+		 * Summary: Saves original length and width,
+         * then modifies them to what it would be if the rotation was successful
+         * Checks if it's a valid rotation,
+		 * if it is, it draws itself in the new position
+         * if not it undoes changes to length and width
+		 * 
+		 */
+        private void Rotation_Click(object sender, RoutedEventArgs e)
+        {
+            clear();
+            //Original mesurements
+            int templength = length[moving];
+            int tempwidth = width[moving];
+
+            length[moving] = tempwidth;
+            width[moving] = templength;
+
+
+            if (tempwidth < templength)
+            {
+                if (isInside(moving))
+                {
+                    draw(moving, 'X');
+                }
+                else
+                {
+
+                    length[moving] = templength;
+                    width[moving] = tempwidth;
+                    draw(moving, 'X');
+                }
+
+
+            }
+            else if (tempwidth > templength)
+            {
+                if (isInside(moving))
+                {
+                    draw(moving, 'X');
+                }
+                else
+                {
+
+                    length[moving] = templength;
+                    width[moving] = tempwidth;
+                    draw(moving, 'X');
+                }
+            }
+
+
+
+        }
+
+        /*Randomize()
+         * Summary: Randomly places every ship
+         * Uses isInside method to check if
+         * the new x,y coordinates are valid
+         * 
+         * 
+         */
+
+        public void randomize()
+        {
+            for (int i=0; i < width.Length; i++)
+            {
+                moving = i;
+                Random rndx = new Random();
+                Random rndy = new Random();
+                int randomx = 0;
+                int randomy = 0;
+                randomx = rndx.Next(10);
+                randomy = rndy.Next(10);
+
+                posy[i] = randomy;
+                posx[i] = randomx;
+                while (! isInside(i))
+                {
+
+                    randomx = rndx.Next(10);
+                    randomy = rndy.Next(10);
+
+                    posy[i] = randomy;
+                    posx[i] = randomx;
+
+                }
+               
+            }
+
+            for (int i = 0; i < width.Length; i++)
+            {
+
+                draw(i, 'X');
+            }
+
+        }
+
+		
 
 		/*Void, no params
 		 *Summary: Cleans the grid, replacing any label by ""
 		 * 
-		 * 
-		 * 
 		 */
-        private void completeclean()
+        private void completeClean()
         {
             for (int i = 0; i < 10; i++)
             {
@@ -133,52 +281,107 @@ namespace battleship
         private void clear()
         {
 
-            draw(length[moving], width[moving], ' ');
+            draw(moving, ' ');
+
+        }
+
+        public int findShip(int x, int y)
+        {
+            return 0;
+        }
+
+        public void rotate(int boat)
+        {
+            clear();
+            //Original mesurements
+            int templength = length[moving];
+            int tempwidth = width[moving];
+
+            length[boat] = tempwidth;
+            width[boat] = templength;
+
+
+            if (tempwidth < templength)
+            {
+                if (isInside(boat))
+                {
+                    draw(boat, 'X');
+                }
+                else
+                {
+
+                    length[boat] = templength;
+                    width[boat] = tempwidth;
+                    draw(boat, 'X');
+                }
+
+
+            }
+            else if (tempwidth > templength)
+            {
+                if (isInside(boat))
+                {
+                    draw(boat, 'X');
+                }
+                else
+                {
+
+                    length[boat] = templength;
+                    width[boat] = tempwidth;
+                    draw(boat, 'X');
+                }
+            }
+
 
         }
 
 
-      
 
-		/*Params: int width: Width of the boat we're drawing
+        /*Params: int width: Width of the boat we're drawing
 		 *		  int length: Length of the boat we're drawing
 		 *		  char a: char we are going to draw inside the label
-		 *Summary: Cleans the place where the boat was previously on
+		 *Summary: Draws a ship of the width and length indicated in the Grid
 		 * 
 		 */
-        private void draw(int width, int length, char a)
+        private void draw(int boat, char a)
         {
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < length[boat]; i++)
             {
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < width[boat]; j++)
 
                 {
                     Label dynamicLabel = new Label();
                     battleGrid.Children.Add(dynamicLabel);
-                    Grid.SetRow(dynamicLabel, i+posx[moving]);
-                    Grid.SetColumn(dynamicLabel,j+posy[moving]);
+                    Grid.SetRow(dynamicLabel, i+posy[boat]);
+                    Grid.SetColumn(dynamicLabel,j+posx[boat]);
 
-                    ((Label)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i+posx[moving] && Grid.GetColumn(f) == j+posy[moving])).Content =a;
+                    ((Label)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i+posy[boat] && Grid.GetColumn(f) == j+posx[boat])).Content =a;
               
                 }
             }
         }
 
 
-
-		private Boolean isvalid(Key key)
+        /*Movement event
+		 * Triggered by:  Any key being pressed
+		 * Summary: Checks if it's a valid movement,
+		 * then erases where it currently is
+		 * then draws itself in the next position 
+		 * 
+		 */
+        private Boolean isvalid(Key key)
 		{
 			
 			if (key == Key.Right)
 			{
-				if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
-				for (int i = 0; i < posy.Length; i++)
+				if (posx[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
+				for (int i = 0; i < posx.Length; i++)
 				{
                     //Checks if it's directly to the left of a ship
-					if (i != moving && posy[moving] + width[moving] == posy[i])
+					if (i != moving && posx[moving] + width[moving] == posx[i])
 					{
                           //Test if it's in the vertical range of the ship next to it
-						if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving]+length[moving])
+						if (posy[moving] >= posy[i] && posy[moving] < posy[i] + length[i] || posy[i] >= posy[moving] && posy[i] < posy[moving]+length[moving])
 							return false;
 					}
 				}
@@ -189,14 +392,14 @@ namespace battleship
 
 			else if (key == Key.Left )
 			{
-				if (posy[moving] <= 0) return false; //If it's at the left edge, then it's invalid
+				if (posx[moving] <= 0) return false; //If it's at the left edge, then it's invalid
 
-				for (int i = 0; i < posy.Length; i++)
+				for (int i = 0; i < posx.Length; i++)
 				{
-					if (i != moving && posy[moving] == posy[i]+width[i])//Checks if it's directly to the right of a ship
+					if (i != moving && posx[moving] == posx[i]+width[i])//Checks if it's directly to the right of a ship
 					{
                         //Test if it's in the vertical range of the ship next to it
-                        if (posx[moving] >= posx[i] && posx[moving] < posx[i] + length[i] || posx[i] >= posx[moving] && posx[i] < posx[moving] + length[moving]) 
+                        if (posy[moving] >= posy[i] && posy[moving] < posy[i] + length[i] || posy[i] >= posy[moving] && posy[i] < posy[moving] + length[moving]) 
 
                             return false;
 
@@ -206,14 +409,14 @@ namespace battleship
 
 			else if (key == Key.Down)
 			{
-				if (posx[moving] +length[moving] >= 10) return false; //If it's at the bottom, then it's invalid
+				if (posy[moving] +length[moving] >= 10) return false; //If it's at the bottom, then it's invalid
 
-				for (int i = 0; i < posy.Length; i++)
+				for (int i = 0; i < posx.Length; i++)
 				{
-					if (i != moving && posx[moving] + length[moving] == posx[i])//Checks if it's directly above a ship
+					if (i != moving && posy[moving] + length[moving] == posy[i])//Checks if it's directly above a ship
 					{
                        
-                        if (posy[moving] + width[moving]  >= posy[i]+1 && posy[moving] + 1 <= posy[i] + width[i] ) //Test if it's in the range of the ship below
+                        if (posx[moving] + width[moving]  >= posx[i]+1 && posx[moving] + 1 <= posx[i] + width[i] ) //Test if it's in the range of the ship below
 						return false;
                       
 					}
@@ -223,14 +426,14 @@ namespace battleship
 
 			else if (key== Key.Up )
 			{
-				if (posx[moving] <= 0) return false;//If it's at the top, then it's invalid
+				if (posy[moving] <= 0) return false;//If it's at the top, then it's invalid
 
-				for (int i = 0; i < posy.Length; i++)
+				for (int i = 0; i < posx.Length; i++)
 				{
-					if (i != moving &&  posx[moving] == posx[i]+length[i])//Checks if it's directly below a ship
+					if (i != moving &&  posy[moving] == posy[i]+length[i])//Checks if it's directly below a ship
 					{
                        
-                        if (posy[moving] + width[moving]  >= posy[i]+1 && posy[moving] + 1 <= posy[i] + width[i] ) //Test if it's in the range of the ship above
+                        if (posx[moving] + width[moving]  >= posx[i]+1 && posx[moving] + 1 <= posx[i] + width[i] ) //Test if it's in the range of the ship above
 						return false;
                       
 					}
@@ -243,101 +446,57 @@ namespace battleship
 			
 		}
 
-        private void Rotation_Click(object sender, RoutedEventArgs e)
+        
+
+        /*IsInside method
+         * args: Key key: the movement is "Right" when rotation 90* towards the left
+         * and "Down" when rotating towards the right
+		 * Summary: Checks if the new rotated ship will be inside another ship
+         * First checks the border, then checks ship collision
+		 * 
+		 */
+        public Boolean isInside(int boat)
         {
-            clear();
-            //Original mesurements
-            int templength = length[moving]; 
-            int tempwidth = width[moving];
-
-           length[moving] = tempwidth;
-            width[moving] = templength;
-
-             
-           if (tempwidth<templength)
-           {
-                if (isInside(Key.Right))
-                {
-                  draw(length[moving], width[moving], 'X');
-                }
-                else
-                {
-                
-                length[moving] = templength;
-                  width[moving] = tempwidth;
-                    draw(length[moving], width[moving], 'X');
-                }
-
-
-           } 
-           else if (tempwidth>templength)
-           {
-               if (isInside(Key.Down))
-               {
-                draw(length[moving], width[moving], 'X');
-               }
-               else 
-               {
-                
-                length[moving] = templength;
-                  width[moving] = tempwidth;
-                    draw(length[moving], width[moving], 'X');
-               }
-           }
             
-          
 
+            if (posx[boat] + width[boat] > 10 || posy[boat] + length[boat] > 10 )
+                return false;  //If it's at the right edge, then it's invalid
+
+				for (int i = 0; i < posy.Length; i++)
+				{
+					if ( posy[boat] +length[boat] <= posy[i] || posy[boat] >= posy[i] + length[i] ) return true;
+
+                    for (int j=0; j< width[boat];j++)
+                    {
+						//MessageBox.Show(j +" + " + posx[moving]+ " >= " + posx[i]+" + " + 1 + " && "+ j +" + " + posx[moving] + " <= " + posx[i] +" + " + width[i] );
+                        if (j + posx[boat] >= posx[i] && j + posx[boat] < posx[i] + width[i] && i != boat) 
+                        return false;
+                    }
+
+
+
+                }
+                
+
+				for (int i = 0; i < posx.Length; i++)
+				{
+                if (posx[boat] + width[boat] <= posx[i] || posx[boat] >= posx[i] + width[i]) return true;
+				
+                    for (int j=0; j< length[boat];j++)
+                    {
+
+						//MessageBox.Show(j +" + " + posy[moving]+ " >= " + posy[i]+" + " + " && "+ j +" + " + posy[moving] + " <= " + posy[i] +" + " + length[i] );
+                        if (j + posy[boat] >= posy[i] && j + posy[boat] < posy[i] + length[i] && i != boat) 
+                        return false;
+                    }
+
+
+
+                }
+
+            return true; //if all tests fail, return true
         }
 
-        public Boolean isInside(Key key)
-        {
-            if (key == Key.Right)
-            {
-
-            if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
-
-				for (int i = 0; i < posy.Length; i++)
-				{
-					if ( posx[moving]+length[moving] <= posx[i] || posx[moving] >= posx[i] + length[i]) return true;
-
-                    for (int j=0; j< width[moving];j++)
-                    {
-						//MessageBox.Show(j +" + " + posy[moving]+ " >= " + posy[i]+" + " + 1 + " && "+ j +" + " + posy[moving] + " <= " + posy[i] +" + " + width[i] );
-                        if (j + posy[moving]>= posy[i] && j + posy[moving] <= posy[i] + width[i] && i != moving) 
-                        return false;
-                    }
-
-
-
-                }
-
-            }
-			else if (key == Key.Down)
-				{
-				if (posy[moving] + width[moving] >= 10) return false;  //If it's at the right edge, then it's invalid
-
-				for (int i = 0; i < posy.Length; i++)
-				{
-					if ( posy[moving]+width[moving] <= posy[i] || posy[moving] >= posy[i] + width[i]) return true;
-
-                    for (int j=0; j< length[moving];j++)
-                    {
-
-						//MessageBox.Show(j +" + " + posx[moving]+ " >= " + posx[i]+" + " + " && "+ j +" + " + posx[moving] + " <= " + posx[i] +" + " + length[i] );
-                        if (j + posx[moving]>= posx[i] && j + posx[moving] <= posx[i] + length[i] && i != moving) 
-                        return false;
-                    }
-
-
-
-                }
-
-            }
-          
-			return true;
-        }      
-
-
-
+       
     }
 }
