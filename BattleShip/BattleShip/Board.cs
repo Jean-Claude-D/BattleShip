@@ -30,7 +30,7 @@ namespace BattleShip
             }
         }
 
-        public void placeShip(Ship toPlace)
+        public bool placeShip(Ship toPlace)
         {
             foreach(Square ShipS in toPlace.position)
             {
@@ -42,16 +42,20 @@ namespace BattleShip
                         {
                             if (this.squares[j, i].isShip())
                             {
+                                return false;
                                 throw new ArgumentException("Cannot put Ship at :\n" + this.squares[j, i].ToString());
                             }
                             else
                             {
                                 this.squares[j, i] = ShipS;
+                                return true;
                             }
                         }
+
                     }
                 }
             }
+            return false;
         }
 
         public bool shoot(Square square)

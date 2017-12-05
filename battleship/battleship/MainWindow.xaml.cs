@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace battleship
+namespace BattleShip
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -31,6 +31,7 @@ namespace battleship
         {
 
             InitializeComponent();
+            Board b = new Board();
 
           for (int i=0;i<5;i++)
             {
@@ -223,14 +224,11 @@ namespace battleship
                 Random rndy = new Random();
                 int randomx = 0;
                 int randomy = 0;
-                randomx = rndx.Next(10);
-                randomy = rndy.Next(10);
+               //   Square[] a = { new Square(0, 0), new Square(0, 1)};
 
-                posy[i] = randomy;
-                posx[i] = randomx;
                 while (! isInside(i))
                 {
-
+                    //for int
                     randomx = rndx.Next(10);
                     randomy = rndy.Next(10);
 
