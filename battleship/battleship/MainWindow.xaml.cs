@@ -26,12 +26,14 @@ namespace BattleShip
         int [] length = new int[5];
         int [] width = new int[5];
         int moving = 0; //what ship you're moving
+		Board battleboard;
 
-        public MainWindow()
+
+		public MainWindow()
         {
 
             InitializeComponent();
-            Board b = new Board();
+             battleboard= new Board();
 
           for (int i=0;i<5;i++)
             {
@@ -217,35 +219,75 @@ namespace BattleShip
 
         public void randomize()
         {
-            for (int i=0; i < width.Length; i++)
+			
+			battleboard = new Board();
+			Ship[] Ships = new Ship[width.Length];
+			Random rndx = new Random();
+			Random rndy = new Random();
+			for (int i=0; i < width.Length; i++)
             {
                 moving = i;
-                Random rndx = new Random();
-                Random rndy = new Random();
+              
                 int randomx = 0;
                 int randomy = 0;
-               //   Square[] a = { new Square(0, 0), new Square(0, 1)};
+				Boolean unique=false;
 
-                while (! isInside(i))
+                while (!unique)
                 {
-                    //for int
-                    randomx = rndx.Next(10);
-                    randomy = rndy.Next(10);
+					unique = true;
 
-                    posy[i] = randomy;
-                    posx[i] = randomx;
+					randomx = rndx.Next(0,10);
+					randomy = rndx.Next(0,10);
+					while (randomx > 10 || randomy + length[i] > 10)
+					{
+						
+						randomx = rndx.Next(0, 10);
+						randomy = rndx.Next(0, 10);
+					}
+					Square[] boats = new Square[width[i] + length[i] - 1];
+
+					
+						for (int j = 0; j < length[i]; j++)
+						{
+								
+								boats[j] = new Square(randomx , randomy+j );
+
+
+						       //  MessageBox.Show(boats[j].ToString());
+
+
+
+
+					    }
+					//}
+					posy[i] = randomy;
+					posx[i] = randomx;
+					
+					Ship boat = new Ship(boats);
+					MessageBox.Show(boat.ToString());
+
+
+						if ( (	!battleboard.placeShip(boat)))
+						{
+							unique = false;
+						}
+
+					
 
                 }
-               
-            }
 
-            for (int i = 0; i < width.Length; i++)
+				posy[i] = randomy;
+				posx[i] = randomx;
+
+			}
+
+			for (int i = 0; i < width.Length; i++)
             {
-
+			//	MessageBox.Show("" + posx[i] + posy[i]);
                 draw(i, 'X');
             }
-
-        }
+			Console.Write((battleboard.ToString()));
+		}
 
 		
 
