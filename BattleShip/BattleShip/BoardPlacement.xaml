@@ -37,9 +37,9 @@
             </Grid>
         </Border>
         <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,404,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-        <Button Content="Restart" HorizontalAlignment="Left" Margin="615,404,0,0" VerticalAlignment="Top" Width="94" Height="26" />
+        <Button x:Name="restartBtn" Content="Restart" HorizontalAlignment="Left" Margin="615,404,0,0" VerticalAlignment="Top" Width="94" Height="26" Click="restartBtn_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="495,324,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="71" Width="336" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
-        <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,404,0,0" VerticalAlignment="Top" Width="87" Height="26"/>
+        <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,404,0,0" VerticalAlignment="Top" Width="87" Height="26" Click="goBtn_Click"/>
         <ComboBox x:Name="levelCBox" HorizontalAlignment="Left" Margin="730,207,0,0" VerticalAlignment="Top" Width="101">
             <ComboBoxItem Content="Level 1" IsSelected="True"/>
             <ComboBoxItem Content="Level 2"/>

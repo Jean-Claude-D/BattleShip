@@ -64,9 +64,9 @@
                 </Grid.RowDefinitions>
             </Grid>
         </Border>
-        <TextBlock HorizontalAlignment="Left" Margin="517,431,0,0" TextWrapping="Wrap" Text="Timer" VerticalAlignment="Top" Height="26" Width="76" FontSize="20" Foreground="White" FontFamily="OCR A Std"/>
-        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,431,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-        <Button Content="Restart" HorizontalAlignment="Left" Margin="615,431,0,0" VerticalAlignment="Top" Width="94" Height="26" />
+        <TextBlock HorizontalAlignment="Left" Margin="520,431,0,0" TextWrapping="Wrap" Text="Timer" VerticalAlignment="Top" Height="26" Width="76" FontSize="20" Foreground="White" FontFamily="OCR A Std"/>
+        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="731,431,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="616,431,0,0" VerticalAlignment="Top" Width="94" Height="26" />
         <TextBlock HorizontalAlignment="Left" Margin="495,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="336" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
     </Grid>
 </Page>
