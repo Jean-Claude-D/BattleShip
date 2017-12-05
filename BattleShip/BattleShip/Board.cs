@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BattleShip
 {
@@ -11,7 +12,12 @@ namespace BattleShip
     {
         /* 2D array of all the squares */
         private Square[,] squares;
+<<<<<<< HEAD
         int available = 100;
+=======
+        private Grid grid;
+
+>>>>>>> Let me out!
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/

@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BattleShip"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="MainWindow"  Height="528.107" Width="878.107" MaxWidth="878.107" MaxHeight="528.107" MinWidth="878.107" MinHeight="528.107">
+=======
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Frame x:Name="mainFrame" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517"/>
+        <Label x:Name="timeLbl" Content="" HorizontalAlignment="Left" Margin="57,64,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="testLbl" Content="" HorizontalAlignment="Left" Margin="248,213,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="223,167,0,0" VerticalAlignment="Top" Width="75" Click="ButtonBase_OnClick"/>
+        <Button x:Name="noNameBtn" Content="Continue" HorizontalAlignment="Left" Margin="426,187,0,0" VerticalAlignment="Top" Width="75" Click="noNameBtn_Click"/>
+>>>>>>> Let me out!
 
 	<Grid x:Name="maingrid" >
         <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="870"/>
