@@ -10,11 +10,12 @@
 
     <Grid SnapsToDevicePixels="True" ClipToBounds="True" OpacityMask="Black" Background="#FF000019">
 
-        <Button x:Name="sendBtn" Content="Send" HorizontalAlignment="Left" Margin="559,334,0,0" VerticalAlignment="Top" Width="75" Click="sendBtn_Click"/>
-        <TextBox x:Name="nameTxt" HorizontalAlignment="Left" Height="22" Margin="226,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328" Background="#FF000019" Foreground="White" FontFamily="OCR A Std" FontSize="14"/>
-        <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="226,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="92" Width="408" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
-		<Button x:Name="continueBtn" Content="Continue" HorizontalAlignment="Left" Margin="479,334,0,0" VerticalAlignment="Top" Width="75" Click="continueBtn_Click" RenderTransformOrigin="-1.2,0.55"/>
-		<Button x:Name="newBtn" Content="New Game" HorizontalAlignment="Left" Margin="559,334,0,0" VerticalAlignment="Top" Width="75" Click="newBtn_Click"/>
+        <Button x:Name="sendBtn" Content="Send" HorizontalAlignment="Left" Margin="623,418,0,0" VerticalAlignment="Top" Width="106" Click="sendBtn_Click" Height="20"/>
+        <TextBox x:Name="nameTxt" HorizontalAlignment="Left" Height="22" Margin="152,418,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="463" Background="#FF000019" Foreground="White" FontFamily="OCR A Std" FontSize="14"/>
+        <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="152,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="93" Width="577" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
+        <Button x:Name="continueBtn" Content="Continue" HorizontalAlignment="Left" Margin="509,418,0,0" VerticalAlignment="Top" Width="106" Click="continueBtn_Click" RenderTransformOrigin="-1.2,0.55" Height="20"/>
+        <Button x:Name="newBtn" Content="New Game" HorizontalAlignment="Left" Margin="623,418,0,0" VerticalAlignment="Top" Width="106" Click="newBtn_Click" Height="20"/>
+        <TextBlock Margin="141,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="OCR A Extended" Height="99" Width="609" FontSize="100" Foreground="White" HorizontalAlignment="Left"><Run Text="BATTLESHI"/><Run Text="P"/></TextBlock>
 
-	</Grid>
+    </Grid>
 </Page>
