@@ -1,0 +1,47 @@
+﻿<Window x:Class="battleship.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:battleship"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="928" Width="1138" KeyDown="movement">
+    <Grid Margin="0,0,-452,-584">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275*"/>
+            <ColumnDefinition Width="1191*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="battleGrid" HorizontalAlignment="Left" Height="600" Margin="234.5,39.5,0,0" 
+              VerticalAlignment="Top" Width="800" UseLayoutRounding="False" ShowGridLines="True"
+              Grid.ColumnSpan="2" PreviewMouseLeftButtonDown="click">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button Content="Move Ship 1" HorizontalAlignment="Left" Margin="32,127,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click1"/>
+        <Button Content="Move Ship 2" HorizontalAlignment="Left" Margin="32,183,0,0" VerticalAlignment="Top" Width="99" Click ="Button_Click2"/>
+        <Button x:Name="Rotation" Content="Rotate Ship" HorizontalAlignment="Left" Margin="32,92,0,0" VerticalAlignment="Top" Width="99" Click="Rotation_Click"/>
+        <Button x:Name="reset" Content="Reset Board" HorizontalAlignment="Left" Margin="32,231,0,0" VerticalAlignment="Top" Width="99" Click="reset_Click"/>
+    </Grid>
+</Window>
