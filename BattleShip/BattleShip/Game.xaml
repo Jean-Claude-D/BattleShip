@@ -4,11 +4,69 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BattleShip"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="Game">
+      mc:Ignorable="d"
+      Title="Game" Height="528.107" Width="878.107">
 
-    <Grid>
-        
+    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000017">
+        <Border  BorderBrush="Black" BorderThickness="2" Margin="37,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0A0036" >
+            <Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <Border  BorderBrush="Black" BorderThickness="2" Margin="517,97,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="320" >
+            <Grid x:Name="battleGrid_Copy" ShowGridLines="True" Margin="0" Height="320" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Background="#FF0A0036">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <TextBlock HorizontalAlignment="Left" Margin="520,431,0,0" TextWrapping="Wrap" Text="Timer" VerticalAlignment="Top" Height="26" Width="76" FontSize="20" Foreground="White" FontFamily="OCR A Std"/>
+        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="731,431,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="616,431,0,0" VerticalAlignment="Top" Width="94" Height="26" />
+        <TextBlock HorizontalAlignment="Left" Margin="495,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="336" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
     </Grid>
 </Page>

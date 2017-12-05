@@ -9,30 +9,75 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BattleShip
 {
-    /// <summary>
-    /// Interaction logic for StartPage.xaml
-    /// </summary>
-    public partial class StartPage : Page
-    {
-        public StartPage()
-        {
-            InitializeComponent();
-        }
+	/// <summary>
+	/// Interaction logic for StartPage.xaml
+	/// </summary>
+	public partial class StartPage : Page
+	{
+		public StartPage()
+		{
+			InitializeComponent();
+            Narrator.displayIntro(msgTxt);
+			continueBtn.Visibility = Visibility.Hidden;
+			newBtn.Visibility = Visibility.Hidden;
+		}
 
-        public void goToBoatPlacement(object setting)
-        {
-            this.NavigationService.Navigate(new BoardPlacement(setting));
-        }
+		public void goToBoatPlacement(object setting)
+		{
+			this.NavigationService.Navigate(new BoardPlacement(setting));
+		}
 
-        public void goToGame(object game)
+		public void goToGame(object game)
+		{
+			this.NavigationService.Navigate(new Game(game));
+		}
+
+        /**
+         * Button pressed after name is entered.
+         * 
+         * @author karina
+         **/ 
+        private void sendBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Game(game));
-        }
-    }
+            string name = nameTxt.Text;
+            //check database
+            //if name in database && saved game
+            Narrator.displayNameFoundSaved(msgTxt, name);
+			nameTxt.Visibility = Visibility.Hidden;
+			sendBtn.Visibility = Visibility.Hidden;
+			continueBtn.Visibility = Visibility.Visible;
+			newBtn.Visibility = Visibility.Visible;
+
+			//if name found no saved game
+			Narrator.displayNameFound(msgTxt, name);
+			nameTxt.Visibility = Visibility.Hidden;
+			sendBtn.Visibility = Visibility.Hidden;
+			newBtn.Visibility = Visibility.Visible;
+
+			//if new name
+			Narrator.newName(msgTxt, name);
+			nameTxt.Visibility = Visibility.Hidden;
+			sendBtn.Visibility = Visibility.Hidden;
+			newBtn.Visibility = Visibility.Visible;
+	
+		}
+
+		private void newBtn_Click(object sender, RoutedEventArgs e)
+		{
+			goToBoatPlacement(new object());
+			//new game code
+		}
+		private void continueBtn_Click(object sender, RoutedEventArgs e)
+		{
+			goToGame(new object());
+			//load game code
+		}
+	}
 }

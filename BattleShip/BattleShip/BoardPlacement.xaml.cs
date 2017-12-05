@@ -29,5 +29,20 @@ namespace BattleShip
         {
             this.NavigationService.Navigate(new Game(game));
         }
+
+        private void goBtn_Click(object sender, RoutedEventArgs e)
+        {
+            goToGame(new object());
+        }
+        
+        private void restartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            goToStart();
+        }
+
+        private void goToStart()
+        {
+            this.NavigationService.Navigate(new StartPage());
+        }
     }
 }

@@ -24,5 +24,15 @@ namespace BattleShip
         {
             InitializeComponent();
         }
+
+        private void newBtn_Click(object sender, RoutedEventArgs e)
+        {
+            goToStart();
+        }
+
+        private void goToStart()
+        {
+            this.NavigationService.Navigate(new StartPage());
+        }
     }
 }
