@@ -7,9 +7,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="300"
       Title="BoardPlacement" Height="528.107" Width="878.107" KeyDown="movement">
+
+    
     <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000019" Margin="0,-1,0,1">
         <Border  BorderBrush="Black" BorderThickness="2" Margin="37,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0A0036" >
-			<Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black" PreviewMouseLeftButtonDown="click">
+            <Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black" PreviewMouseLeftButtonDown="click" >
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

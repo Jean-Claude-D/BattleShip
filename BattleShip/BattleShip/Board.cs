@@ -82,7 +82,7 @@ namespace BattleShip
             }
         }
 
-
+		
 		public Boolean isTaken(Square space)
 		{
 			return this.squares[space.getX(), space.getY()].isShip();
@@ -90,6 +90,7 @@ namespace BattleShip
 
 
 		public bool shoot(Square square)
+
         {
             foreach(Square s in this.squares)
             {

@@ -21,8 +21,10 @@ namespace BattleShip
     /// <summary>
     /// Interaction logic for BoardPlacement.xaml
     /// </summary>
+    /// 
     public partial class BoardPlacement : Page
     {
+
         readonly StartPageData startPageData;
 		
 			int[] posx = new int[5];
@@ -495,6 +497,7 @@ namespace BattleShip
 
 
 			public void goToGame(BoardPlacementData boardPlacementData)
+
         {
             this.NavigationService.Navigate(new Game(boardPlacementData));
         }
