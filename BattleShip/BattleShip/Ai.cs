@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    public enum AiLevel
+    {
+        EASY, MEDIUM, HARD
+    }
+
     abstract class Ai : Player
     {
         public abstract Square MakeMove(Board board);
