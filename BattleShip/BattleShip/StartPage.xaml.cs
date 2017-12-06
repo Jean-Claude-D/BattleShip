@@ -37,7 +37,7 @@ namespace BattleShip
 		private void goToGame(string playerFileName)
 		{
             //Load and deserialize file at playerFileName
-			this.NavigationService.Navigate(new Game(new GamePageData()));
+			this.NavigationService.Navigate(PlayerDB.getDB().loadGame(playerFileName));
 		}
 
         /**
@@ -48,26 +48,18 @@ namespace BattleShip
         private void sendBtn_Click(object sender, RoutedEventArgs e)
         {
             string name = nameTxt.Text;
-            //check database
-            //if name in database && saved game
+
             Narrator.displayNameFoundSaved(msgTxt, name);
-			nameTxt.Visibility = Visibility.Hidden;
-			sendBtn.Visibility = Visibility.Hidden;
-			continueBtn.Visibility = Visibility.Visible;
-			newBtn.Visibility = Visibility.Visible;
 
-			//if name found no saved game
-			Narrator.displayNameFound(msgTxt, name);
-			nameTxt.Visibility = Visibility.Hidden;
-			sendBtn.Visibility = Visibility.Hidden;
-			newBtn.Visibility = Visibility.Visible;
+            nameTxt.Visibility = Visibility.Hidden;
+            sendBtn.Visibility = Visibility.Hidden;
+            newBtn.Visibility = Visibility.Visible;
+            continueBtn.Visibility = Visibility.Hidden;
 
-			//if new name
-			Narrator.newName(msgTxt, name);
-			nameTxt.Visibility = Visibility.Hidden;
-			sendBtn.Visibility = Visibility.Hidden;
-			newBtn.Visibility = Visibility.Visible;
-	
+            if (PlayerDB.getDB().isPlayerExist(name))
+            {
+                continueBtn.Visibility = Visibility.Visible;
+            }
 		}
 
 		private void newBtn_Click(object sender, RoutedEventArgs e)
@@ -77,7 +69,7 @@ namespace BattleShip
 		}
 		private void continueBtn_Click(object sender, RoutedEventArgs e)
 		{
-			goToGame(nameTxt.Text + ".ser");
+			goToGame(nameTxt.Text);
 			//load game code
 		}
 	}

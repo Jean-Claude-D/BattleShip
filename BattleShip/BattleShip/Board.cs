@@ -9,13 +9,13 @@ using System.Windows.Controls;
 namespace BattleShip
 {
     
-    class Board
+    public class Board
     {
         /* 2D array of all the squares */
         private Square[,] squares;
 
         int available = 100;
-        public Grid grid;
+        [NonSerialized]  public Grid grid;
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/

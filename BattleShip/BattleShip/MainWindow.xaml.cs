@@ -29,6 +29,12 @@ namespace BattleShip
             goToStartPage();
         }
 
+        public static void exit()
+        {
+            PlayerDB.getDB().saveDB();
+            System.Windows.Application.Current.Shutdown();
+        }
+
         public void goToStartPage()
         {
             mainFrame.NavigationService.Navigate(new StartPage());
