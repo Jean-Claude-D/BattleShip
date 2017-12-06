@@ -32,60 +32,86 @@ namespace BattleShip
         public Square finishShip(Board board)
         {
             Square[,] squares = board.AllSquares();
-            //SIMPLIFY
-            for (int i = 0; i < squares.GetLength(0); i++)
-            {
-                for (int j = 0; j < squares.GetLength(1); j++)
+			
+			//SIMPLIFY
+			for (int i = 0; i < squares.GetLength(0); i++)
+			{
+				//Console.Write(squares[i, i].ToString());
+				for (int j = 0; j < squares.GetLength(1); j++)
                 {
-                    if (board.IsShipShotNotSunk(i, j))
+					//Console.Write(squares[i, j].ToString());
+					if (board.IsShipShotNotSunk(i, j))
                     {
-                        if (i + 1 < squares.Length && board.IsShipShotNotSunk(i + 1, j))
+						int indexi = i;
+						int indexj = j;
+						//Console.Write(squares[i, j].ToString());
+
+						if (i + 1 < squares.GetLength(0) && board.IsShipShotNotSunk(i + 1, j))
                         {
-                            int index = i + 2;
-                            while (index < squares.Length && board.IsShipShotNotSunk(index, j))
+							indexi = i + 1;
+							
+                            while (indexi + 1 < squares.GetLength(0) && board.IsShipShotNotSunk(indexi - 1, j))
                             {
-                                index++;
-                            }
-                            return squares[index, j];
+								Console.Write(squares[indexi, j].ToString());
+								indexi++;
+                            }                           
+							return squares[indexi, j];
                         }
 
-                        if (i - 1 > 0 && board.IsShipShotNotSunk(i - 1, j))
+						if (indexi != i || indexj != j)
+						{
+							return squares[indexi, indexj];
+						}
+
+						if (i - 1 >= 0 && board.IsShipShotNotSunk(i - 1, j))
                         {
-                            int index = i - 2;
-                            while (index > 0 && board.IsShipShotNotSunk(index, j))
+                            indexi = i - 1;
+                            while (indexi - 1 >= 0 && board.IsShipShotNotSunk(indexi - 1, j))
                             {
-                                index--;
+                                indexi--;
                             }
-                            return squares[index, j];
+                            return squares[indexi, j];
                         }
 
-                        if (j + 1 < squares.Length && board.IsShipShotNotSunk(i, j + 1))
+						if (indexi != i || indexj != j)
+						{
+							return squares[indexi, indexj];
+						}
+
+						if (j + 1 < squares.GetLength(1) && board.IsShipShotNotSunk(i, j + 1))
                         {
-                            int index = j + 2;
-                            while (index < squares.Length && board.IsShipShotNotSunk(i, index))
+                            indexj = j + 1;
+                            while (indexj + 1 < squares.GetLength(1) && board.IsShipShotNotSunk(i, indexj + 1))
                             {
-                                index++;
+                                indexj++;
                             }
-                            return squares[i, index];
+                            return squares[i, indexj];
                         }
-                        if (j - 1 > 0 && board.IsShipShotNotSunk(i, j - 1))
+
+						if (indexi != i || indexj != j)
+						{
+							return squares[indexi, indexj];
+						}
+
+						if (j - 1 >= 0 && board.IsShipShotNotSunk(i, j - 1))
                         {
-                            int index = j - 2;
-                            while (index > 0 && board.IsShipShotNotSunk(i, index))
+                            indexj = j - 1;
+                            while (indexj - 1 >= 0 && board.IsShipShotNotSunk(i, indexj - 1))
                             {
-                                index--;
+                                indexj--;
                             }
-                            return squares[i, index];
+                            return squares[i, indexj];
                         }
+
+						if (indexi != i || indexj != j)
+						{
+							return squares[indexi, indexj];
+						}
                     }
                 }
             }
             return null;
         }
-
-
-    }
-
     class Easy : Ai
     {
         /**

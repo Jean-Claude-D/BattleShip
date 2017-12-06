@@ -81,9 +81,10 @@ namespace BattleShip
                     break;
                 default:
                     throw new NotSupportedException("Ai unknown");
-            }
+			}
 
-            aiBoard = new Board(battleGrid_Copy);
+			Console.Write(ai.ToString());
+			aiBoard = new Board(battleGrid_Copy);
             battleGrid_Copy.IsEnabled = false;
             for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
             {
