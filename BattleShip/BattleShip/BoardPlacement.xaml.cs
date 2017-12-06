@@ -35,10 +35,15 @@ namespace BattleShip
 			Board battleboard;
 			Ship[] battleships;
 			Ship[] aiships;
-			public BoardPlacement(Object obj)
-			{
-				InitializeComponent(); completeClean();
-				battleboard = new Board(battleGrid);
+		
+		public BoardPlacement(StartPageData startPageData)
+
+		{
+
+			InitializeComponent(); completeClean();
+			/* Saving startPageData from previous StartPage while the user is choosing his ships and settings*/
+			this.startPageData = startPageData;
+			battleboard = new Board(battleGrid);
 				battleships = new Ship[5];
 
 				randomize();
