@@ -1,9 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "battleship", "battleship\battleship.csproj", "{A35F36DD-2C17-4A73-9E17-727EA57A9923}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip", "BattleShip\BattleShip.csproj", "{A35F36DD-2C17-4A73-9E17-727EA57A9923}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F15A808C-FDCF-42F9-8F61-F5CE1A7D6942}"
+	ProjectSection(SolutionItems) = preProject
+		battleship\Board.cs = battleship\Board.cs
+		battleship\BoardLimit.cs = battleship\BoardLimit.cs
+		battleship\BoardPlacement.xaml = battleship\BoardPlacement.xaml
+		battleship\BoardPlacement.xaml.cs = battleship\BoardPlacement.xaml.cs
+		battleship\Game.xaml = battleship\Game.xaml
+		battleship\Game.xaml.cs = battleship\Game.xaml.cs
+		battleship\MainWindow.xaml = battleship\MainWindow.xaml
+		battleship\MainWindow.xaml.cs = battleship\MainWindow.xaml.cs
+		battleship\Player.cs = battleship\Player.cs
+		battleship\ScoreBoard.xaml = battleship\ScoreBoard.xaml
+		battleship\ScoreBoard.xaml.cs = battleship\ScoreBoard.xaml.cs
+		battleship\Ship.cs = battleship\Ship.cs
+		battleship\Square.cs = battleship\Square.cs
+		battleship\StartPage.xaml = battleship\StartPage.xaml
+		battleship\StartPage.xaml.cs = battleship\StartPage.xaml.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +39,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5B0D0412-10A3-466B-9772-3F81BC14A8ED}
+		SolutionGuid = {909654A9-EFCB-49A6-B1DB-E75B6FB50C03}
 	EndGlobalSection
 EndGlobal

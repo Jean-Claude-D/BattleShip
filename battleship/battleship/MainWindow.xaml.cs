@@ -26,13 +26,14 @@ namespace BattleShip
         int[] width = new int[5];
         int moving = 0; //what ship you're moving
         Board battleboard;
+        Ship[] battleships;
 
         public MainWindow()
         {
             InitializeComponent();
             completeClean();
             battleboard = new Board();
-
+            battleships = new Ship[5];
             for (int i = 0; i < 5; i++)
             {
                 width[i] = 1;
@@ -69,8 +70,8 @@ namespace BattleShip
 
         /*
         Event: Click
-         *Summary: A lot of code stoled that find the row and column 
-         * of a grid space when it's clicked
+         *Summary:Finds the row and column of a grid space when it's clicked
+         * Calls rotation if it's a double click
          */ 
         
         private void click(object sender, MouseButtonEventArgs e)
@@ -102,11 +103,13 @@ namespace BattleShip
 
             if (e.ClickCount == 1) // for double-click, remove this condition if only want single click
             {
-                //rotate(findShip(row, col));
+                int temp = (findShip(col, row));
+                if (temp >= 0) moving = temp;
             }
            else if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
            {
-                //rotate(findShip(row, col));
+                int temp = (findShip(col, row));
+                if (temp >= 0) rotate(temp);
            }
 
         }
@@ -118,7 +121,7 @@ namespace BattleShip
             randomize();
         }
 
-        /*Movement event
+        /*Movement event 
 		 * Triggered by:  Any key being pressed
 		 * Summary: Checks if it's a valid movement,
 		 * then erases where it currently is
@@ -156,7 +159,7 @@ namespace BattleShip
             }
         }
 
-        /*Rotation event
+        /*Rotation event STUB
 		 * Triggered by:  Button being pressed
 		 * Summary: Saves original length and width,
          * then modifies them to what it would be if the rotation was successful
@@ -205,21 +208,16 @@ namespace BattleShip
 
         /*Randomize()
          * Summary: Randomly places every ship
-         * Uses isInside method to check if
-         * the new x,y coordinates are valid
-         * 
-         * 
+         * Uses the Board's isTaken method to check if
+         * the new x,y coordinates are already ships
          */
 
         public void randomize()
         {
             battleboard = new Board();
-            Ship[] Ships = new Ship[width.Length];
             Random rndx = new Random();
             for (int i = 0; i < width.Length; i++)
             {
-                moving = i;
-
                 int randomx = 0;
                 int randomy = 0;
                 Boolean unique = false;
@@ -227,7 +225,6 @@ namespace BattleShip
                 while (!unique)
                 {
                     unique = true;
-
                     randomx = rndx.Next(0, 10);
                     randomy = rndx.Next(0, 10);
 
@@ -241,27 +238,31 @@ namespace BattleShip
                     for (int j = 0; j < length[i]; j++)
                     {
                         boats[j] = new Square(randomx, randomy + j);
-                        //Console.Write(boats[j].ToString());
+                        Console.Write(j);
                         if (battleboard.isTaken(boats[j]))
+                        {
                             unique = false;
+                        }
+
                     }
-                    //}
+
                     if (unique)
-                        battleboard.placeShip(new Ship(boats));
-                    //MessageBox.Show(boat.ToString());
+                    {
+                        battleships[i] = new Ship(boats);
+                        battleboard.placeShip(battleships[i]);
+                    }
+
                 }
                 posy[i] = randomy;
                 posx[i] = randomx;
 
             }
-            //Console.Write("\n ======================================");
+
             for (int i = 0; i < width.Length; i++)
-            {
-                //	MessageBox.Show("" + posx[i] + posy[i]);
-                //Console.Write("\n"+ i +" row "+" "+ posx[i]+" col  " + posy[i] + " "  +length[i]);
+            { 
                 draw(i, 'X');
             }
-            //	Console.Write((battleboard.ToString()));
+
         }
 
         /*Void, no params
@@ -296,7 +297,18 @@ namespace BattleShip
 
         public int findShip(int x, int y)
         {
-            return 0;
+            for (int i = 0; i < battleships.Length; i++)
+            {
+                      Console.Write("\n " + i + " " + battleboard.getSquare(x, y).getShip().ToString() + " " + battleships[i].ToString());
+
+                if (battleboard.getSquare(x,y).getShip() == battleships[i])
+                {
+                    return i;
+                }
+
+                    
+            }
+            return -1;
         }
 
         public void rotate(int boat)

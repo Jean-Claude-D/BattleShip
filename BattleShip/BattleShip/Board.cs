@@ -114,5 +114,15 @@ namespace BattleShip
             }
             return toReturn + "------------------------------\n";
         }
+
+        /*Params: x & y coordinates of the Square you want to get
+         *Summary: Returns the Square corresponding to the
+         * given coordinates on the Board
+         */
+        public Square getSquare(int x, int y)
+        {
+            return this.squares[x, y];
+        }
+
     }
 }

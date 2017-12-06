@@ -12,7 +12,7 @@ namespace BattleShip
         private readonly int yCoordinate;
         private Ship shipThere;
         private bool hasBeenShot;
-
+        
         public Square(int xCoordinate, int yCoordinate) : this(xCoordinate, yCoordinate, null) { }
 
         public Square(int xCoordinate, int yCoordinate, Ship shipThere)
@@ -110,5 +110,12 @@ namespace BattleShip
             }
             return this.shipThere.getIsSunk();
         }
+
+        public Ship getShip()
+        {
+            return this.shipThere;
+        }
+     
+
     }
 }

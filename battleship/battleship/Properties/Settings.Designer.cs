@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace battleship.Properties
+namespace BattleShip.Properties
 {
 
 
