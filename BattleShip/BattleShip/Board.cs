@@ -36,6 +36,16 @@ namespace BattleShip
             this.grid = grid;
         }
 
+        /* Returns true if all the Square in this Board's squares are either empty or contain a Ship that is completely sunk 
+                   false otherwise*/
+        public bool isAllShipSunk()
+        {
+            foreach(Square boardSquare in this.squares)
+            {
+                if()
+            }
+        }
+
         public void placeShip(Ship toPlace)
         {
             foreach(Square ShipS in toPlace.position)
@@ -164,9 +174,9 @@ namespace BattleShip
             Square[] avail = new Square[available];
             int k = 0;
 
-            for (int i = 0; i < this.squares.Length; i++)
+            for (int i = 0; i < this.squares.GetLength(0); i++)
             {
-                for (int j = 0; j < this.squares.Length; j++)
+                for (int j = 0; j < this.squares.GetLength(1); j++)
                 {
                     if (!this.squares[i, j].isShot())
                     {
