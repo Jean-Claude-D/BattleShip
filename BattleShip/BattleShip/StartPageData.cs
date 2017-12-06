@@ -16,8 +16,9 @@ namespace BattleShip
             /* A null, or empty or whitespaces filled string is rejected */
             if(playerName == null || playerName.Trim().Length == 0)
             {
-                throw new ArgumentException("playerName cannot be null or empty");
-            }
+				this.playerName = "No name";
+
+			}
             this.playerName = playerName;
         }
 

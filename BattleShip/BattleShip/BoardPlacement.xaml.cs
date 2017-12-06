@@ -46,7 +46,7 @@ namespace BattleShip
 			battleboard = new Board(battleGrid);
 				battleships = new Ship[5];
 
-				randomize();
+				randomize(battleships);
 			}
 
 
@@ -100,7 +100,7 @@ namespace BattleShip
 			private void reset_Click(object sender, RoutedEventArgs e)
 			{
 
-				randomize();
+				randomize(battleships);
 			}
 
 			/*Movement event 
@@ -118,25 +118,25 @@ namespace BattleShip
 					{
 						clear(moving);
 						posx[moving]++;
-						draw(moving, 'X');
+						draw(moving, true);
 					}
 					else if (e.Key == Key.Left)
 					{
 						clear(moving);
 						posx[moving]--;
-						draw(moving, 'X');
+						draw(moving, true);
 					}
 					else if (e.Key == Key.Down)
 					{
 						clear(moving);
 						posy[moving]++;
-						draw(moving, 'X');
+						draw(moving, true);
 					}
 					else if (e.Key == Key.Up)
 					{
 						clear(moving);
 						posy[moving]--;
-						draw(moving, 'X');
+						draw(moving, true);
 					}
 				}
 			}
@@ -163,8 +163,8 @@ namespace BattleShip
 				}
 
 				aiships = new Ship[5];
-				resets();
-				randomize();
+				completeClean();
+				randomize(aiships);
 
 				for (int i = 0; i < width.Length; i++)
 				{
@@ -207,7 +207,7 @@ namespace BattleShip
 			 * the new x,y coordinates are already ships
 			 */
 
-			public void randomize()
+			public void randomize( Ship[] randomships)
 			{
 				resets();
 				battleboard = new Board(battleGrid);
@@ -249,8 +249,8 @@ namespace BattleShip
 
 						if (unique)
 						{
-							battleships[i] = new Ship(boats);
-							battleboard.placeShip(battleships[i]);
+							randomships[i] = new Ship(boats);
+							battleboard.placeShip(randomships[i]);
 						}
 
 					}
@@ -268,7 +268,7 @@ namespace BattleShip
 
 				for (int i = 0; i < width.Length; i++)
 				{
-					draw(i, 'X');
+					draw(i, true);
 				}
 
 
@@ -289,8 +289,9 @@ namespace BattleShip
 						battleGrid.Children.Add(dynamicButton);
 						Grid.SetRow(dynamicButton, i);
 						Grid.SetColumn(dynamicButton, j);
-
-						((Button)battleGrid.Children.Cast<UIElement>().First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == j)).Content = ("");
+					 BrushConverter bc = new BrushConverter();
+					dynamicButton.Background = (Brush)bc.ConvertFrom("#FF0A0036");
+					((Button)battleGrid.Children.Cast<UIElement>().First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == j)).Content = ("");
 					}
 				}
 			}
@@ -301,7 +302,7 @@ namespace BattleShip
 			 */
 			private void clear(int boat)
 			{
-				draw(boat, ' ');
+				draw(boat, false);
 			}
 
 			/*int findShip(int x, int y)
@@ -343,26 +344,26 @@ namespace BattleShip
 				{
 					if (isInside(boat))
 					{
-						draw(boat, 'X');
+						draw(boat, true);
 					}
 					else
 					{
 						length[boat] = templength;
 						width[boat] = tempwidth;
-						draw(boat, 'X');
+						draw(boat, true);
 					}
 				}
 				else if (tempwidth > templength)
 				{
 					if (isInside(boat))
 					{
-						draw(boat, 'X');
+						draw(boat, true);
 					}
 					else
 					{
 						length[boat] = templength;
 						width[boat] = tempwidth;
-						draw(boat, 'X');
+						draw(boat, true);
 					}
 				}
 			}
@@ -375,7 +376,7 @@ namespace BattleShip
 			 *Summary: Draws a ship of the width and length indicated in the Grid
 			 * 
 			 */
-			private void draw(int boat, char a)
+			private void draw(int boat, bool a)
 			{
 				for (int i = 0; i < length[boat]; i++)
 				{
@@ -385,7 +386,17 @@ namespace BattleShip
 						battleGrid.Children.Add(dynamicButton);
 						Grid.SetRow(dynamicButton, i + posy[boat]);
 						Grid.SetColumn(dynamicButton, j + posx[boat]);
-						dynamicButton.Content = a;
+						
+						BrushConverter bc = new BrushConverter();
+						
+					 if (a)
+					 {
+						dynamicButton.Background = (Brush)bc.ConvertFrom("#FF820933");
+					 }
+					 else
+					 {
+						dynamicButton.Background = (Brush)bc.ConvertFrom("#FF0A0036");
+					 }
 						((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i + posy[boat] && Grid.GetColumn(f) == j + posx[boat])).Content = a;
 
 					}
@@ -513,7 +524,7 @@ namespace BattleShip
 			AiLevel currSelectionLevel = (AiLevel)Enum.Parse(typeof(AiLevel), ((string)((ComboBoxItem)levelCBox.SelectedItem).Content).ToUpper());
             int currSelectionTime = int.Parse((string)((ComboBoxItem)timerCBox.SelectedItem).Content);
 
-            goToGame(new BoardPlacementData(this.startPageData, battleships, aiships, currSelectionLevel, currSelectionTime));
+            goToGame(new BoardPlacementData(this.startPageData, aiships, battleships, currSelectionLevel, currSelectionTime));
         }
         
         private void restartBtn_Click(object sender, RoutedEventArgs e)
@@ -525,5 +536,12 @@ namespace BattleShip
         {
             this.NavigationService.Navigate(new StartPage());
         }
-    }
+
+		private void shuffling(object sender, RoutedEventArgs e)
+		{
+			randomize(battleships);
+		}
+		
+
+	}
 }
