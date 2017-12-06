@@ -71,7 +71,7 @@ namespace BattleShip
             {
                 positions += s.ToString() + "\n";
             }
-            return positions + "Is " + ((this.isSunk)?("sunk"):("alive"));
+            return positions + " Is " + ((this.isSunk)?(" sunk "):(" alive "));
         }
 
     }

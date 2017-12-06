@@ -98,8 +98,8 @@ namespace BattleShip
         public override String ToString()
         {
             return this.xCoordinate + "," + this.yCoordinate + " :\n"
-                + ((this.isShip())?(""):("No ")) + "Ship there\n"
-                + "Has " + ((this.hasBeenShot)?(""):("not")) + "been shot";
+                + ((this.isShip())?(""):(" No ")) + " Ship there \n"
+                + " Has " + ((this.hasBeenShot)?(""):(" not")) + " been shot ";
         }
 
         public bool hasShipSunk()

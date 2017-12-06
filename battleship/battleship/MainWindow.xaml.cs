@@ -21,8 +21,8 @@ namespace BattleShip
     public partial class MainWindow : Window
     {
 
-       int [] posy = new int[5];
-        int [] posx = new int[5];
+		int[] posx = new int[5];
+		int [] posy = new int[5];    
         int [] length = new int[5];
         int [] width = new int[5];
         int moving = 0; //what ship you're moving
@@ -47,22 +47,24 @@ namespace BattleShip
             length[2] = 3;
             length[3] = 3;
             length[4] = 2;
-            randomize();
+			randomize();
+			
 
-        }
+
+		}
 
 		/*Event for testing purposes
 		 *Summary: Draws
 		 * 
 		 * 
 		 */
-      
 
-        /*Temporary event things
+
+		/*Temporary event things
          * 
          * 
          */
-		 private void Button_Click1(object sender, RoutedEventArgs e)
+		private void Button_Click1(object sender, RoutedEventArgs e)
          {
            moving=0;
          }
@@ -223,7 +225,6 @@ namespace BattleShip
 			battleboard = new Board();
 			Ship[] Ships = new Ship[width.Length];
 			Random rndx = new Random();
-			Random rndy = new Random();
 			for (int i=0; i < width.Length; i++)
             {
                 moving = i;
@@ -238,12 +239,14 @@ namespace BattleShip
 
 					randomx = rndx.Next(0,10);
 					randomy = rndx.Next(0,10);
+
 					while (randomx > 10 || randomy + length[i] > 10)
 					{
 						
 						randomx = rndx.Next(0, 10);
 						randomy = rndx.Next(0, 10);
 					}
+
 					Square[] boats = new Square[width[i] + length[i] - 1];
 
 					
@@ -253,40 +256,40 @@ namespace BattleShip
 								boats[j] = new Square(randomx , randomy+j );
 
 
-						       //  MessageBox.Show(boats[j].ToString());
+								//Console.Write(boats[j].ToString());
 
+							if (!battleboard.isTaken(boats[j]))
+							{
+							unique = false;
+							}
 
 
 
 					    }
 					//}
-					posy[i] = randomy;
-					posx[i] = randomx;
-					
 					Ship boat = new Ship(boats);
-					MessageBox.Show(boat.ToString());
+					if (unique)	battleboard.placeShip(boat);
+					//MessageBox.Show(boat.ToString());
 
 
-						if ( (	!battleboard.placeShip(boat)))
-						{
-							unique = false;
-						}
 
-					
 
-                }
+
+
+				}
 
 				posy[i] = randomy;
 				posx[i] = randomx;
 
 			}
-
+			//Console.Write("\n ======================================");
 			for (int i = 0; i < width.Length; i++)
             {
 			//	MessageBox.Show("" + posx[i] + posy[i]);
-                draw(i, 'X');
+				//Console.Write("\n"+ i +" row "+" "+ posx[i]+" col  " + posy[i] + " "  +length[i]);
+				draw(i, 'X');
             }
-			Console.Write((battleboard.ToString()));
+		//	Console.Write((battleboard.ToString()));
 		}
 
 		

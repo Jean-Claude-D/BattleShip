@@ -30,35 +30,56 @@ namespace BattleShip
             }
         }
 
-        public bool placeShip(Ship toPlace)
-        {
-            foreach(Square ShipS in toPlace.position)
-            {
-                for (int i = 0; i < this.squares.GetLength(0); i++)
-                {
-                    for (int j = 0; j < this.squares.GetLength(1); j++)
-                    {
-                        if (ShipS.Equals(this.squares[j, i]))
-                        {
-                            if (this.squares[j, i].isShip())
-                            {
-                                return false;
-                                throw new ArgumentException("Cannot put Ship at :\n" + this.squares[j, i].ToString());
-                            }
-                            else
-                            {
-                                this.squares[j, i] = ShipS;
-                                return true;
-                            }
-                        }
 
-                    }
-                }
-            }
-            return false;
-        }
+		public void placeShip(Ship toPlace)
+		{
+			foreach (Square ShipS in toPlace.position)
+			{
+				for (int i = 0; i < this.squares.GetLength(0); i++)
+				{
+					for (int j = 0; j < this.squares.GetLength(1); j++)
+					{
+						if (ShipS.Equals(this.squares[j, i]))
+						{
+							if (this.squares[j, i].isShip())
+							{
+								throw new ArgumentException("Cannot put Ship at :\n" + this.squares[j, i].ToString());
+							}
+							else
+							{
+								this.squares[j, i] = ShipS;
+							}
+						}
+					}
+				}
+			}
+		}
 
-        public bool shoot(Square square)
+		public Boolean isTaken(Square space)
+		{
+			for (int i = 0; i < this.squares.GetLength(0); i++)
+			{
+				for (int j = 0; j < this.squares.GetLength(1); j++)
+				{
+					if (space.Equals(this.squares[j, i]))
+					{
+						if (this.squares[j, i].isShip())
+						{
+							return false;
+						}
+						else
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+
+
+		public bool shoot(Square square)
         {
             foreach(Square s in this.squares)
             {
@@ -96,7 +117,7 @@ namespace BattleShip
                     {
                         toReturn += "[O]";
                     }
-                    else
+                    else if (ship && shot)
                     {
                         if(this.squares[j, i].hasShipSunk())
                         {
