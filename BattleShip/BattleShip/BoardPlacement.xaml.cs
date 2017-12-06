@@ -43,6 +43,9 @@ namespace BattleShip
 			InitializeComponent(); completeClean();
 			/* Saving startPageData from previous StartPage while the user is choosing his ships and settings*/
 			this.startPageData = startPageData;
+
+			Narrator.placing(narratorTxt, startPageData.getPlayerName());
+
 			battleboard = new Board(battleGrid);
 				battleships = new Ship[5];
 
@@ -541,7 +544,7 @@ namespace BattleShip
 		{
 			randomize(battleships);
 		}
-		
 
+		
 	}
 }
