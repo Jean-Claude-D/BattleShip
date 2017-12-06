@@ -59,6 +59,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardLimit.cs" />
     <Compile Include="BoardPlacementData.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>

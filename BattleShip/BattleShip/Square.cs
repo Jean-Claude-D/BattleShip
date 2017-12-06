@@ -11,7 +11,7 @@ namespace BattleShip
         private readonly int xCoordinate;
         private readonly int yCoordinate;
         private Ship shipThere;
-        private bool hasBeenShot;
+        private bool hasBeenShot = false;
 
         public Square(int xCoordinate, int yCoordinate) : this(xCoordinate, yCoordinate, null) { }
 
