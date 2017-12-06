@@ -11,7 +11,7 @@ namespace BattleShip
     /// </summary>
     public partial class Game : Page
     {
-        readonly BoardPlacementData boardPlacementData;
+        readonly GamePageData gamePageData;
         DispatcherTimer idleTimeDispatcher;
         private int currIdleTimeLeft;
 
@@ -21,38 +21,26 @@ namespace BattleShip
 
         private int turnCount; //incremented in aiMove, because AI will always play
 
-        /*The Board the player shoots on*/
-        Board playerBoard;
-        /*The Board the ai shoots on*/
-        Board aiBoard;
-
-        Ai ai;
-
         public Game(GamePageData gamePageData)
         {
+            this.gamePageData = gamePageData;
+
+            startMainTimer(this.gamePageData.getTimeSec(), this.gamePageData.getTimeMin(), this.gamePageData.getTimeHour());
+
             InitializeComponent();
 
-            /* get time from gamePageData */
-            startMainTimer(0, 0, 50);
-            initPlayerTicker(2);
-            playerBoard = new Board(new Grid());
-            aiBoard = new Board(new Grid());
-            ai = new Easy();
+            /* get time from gamePageData, from its boardPlacementData */
+            initPlayerTicker(this.gamePageData.boardPlacementData.getIdleTime());
 
             /* Attach both board to the correct Grid objects */
             /* Because after serialization, Grid are not shallow copied */
-            playerBoard.grid = battleGrid;
-            aiBoard.grid = battleGrid_Copy;
+            this.gamePageData.playerBoard.grid = battleGrid;
+            this.gamePageData.aiBoard.grid = battleGrid_Copy;
         }
 
         public Game(BoardPlacementData boardPlacementData)
         {
-            this.boardPlacementData = boardPlacementData;
-
             InitializeComponent();
-
-            startMainTimer(0, 0, 0);
-            initPlayerTicker(boardPlacementData.getIdleTime());
 
             for (int i = 0; i < 10; i++)
             {
@@ -79,6 +67,7 @@ namespace BattleShip
                 }
             }
 
+            Ai ai;
             switch (boardPlacementData.getLevel())
             {
                 case AiLevel.EASY:
@@ -94,18 +83,25 @@ namespace BattleShip
                     throw new NotSupportedException("Ai unknown");
             }
 
-            aiBoard = new Board(battleGrid_Copy);
+            Board aiBoard = new Board(battleGrid_Copy);
             battleGrid_Copy.IsEnabled = false;
             for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
             {
                 aiBoard.placeShip(boardPlacementData.getAiShip()[i]);
             }
 
-            playerBoard = new Board(battleGrid);
+            Board playerBoard = new Board(battleGrid);
             for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
             {
                 playerBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
             }
+
+            this.gamePageData = new GamePageData(boardPlacementData, 0, 0, 0, 0, playerBoard, aiBoard, ai);
+
+            initPlayerTicker(this.gamePageData.boardPlacementData.getIdleTime());
+
+            startMainTimer(this.gamePageData.getTimeSec(), this.gamePageData.getTimeMin(), this.gamePageData.getTimeHour());
+
             idleTimeDispatcher.Start();
         }
 
@@ -128,7 +124,7 @@ namespace BattleShip
                 /* ... Let the AI play*/
                 aiMove();
                 /* Reset the idleTime counter */
-                this.currIdleTimeLeft = boardPlacementData.getIdleTime();
+                this.currIdleTimeLeft = this.gamePageData.boardPlacementData.getIdleTime();
             }
         }
 
@@ -166,7 +162,7 @@ namespace BattleShip
             }
             string toReturn = ((currTimeHour != 0) ? (currTimeHour + " h ") : ("")) +
                 ((currTimeMin != 0) ? (currTimeMin + " min ") : ("")) +
-                ((currTimeSec != 0) ? (currTimeSec + " sec") : (""));
+                ((currTimeMin != 0 && currTimeHour != 0 && currTimeSec == 0) ? ("") : (currTimeSec + " sec"));
 
             currTimeSec++;
 
@@ -183,11 +179,11 @@ namespace BattleShip
                 {
                     if (((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Equals((Button)sender))
                     {
-                        playerBoard.shoot(new Square(j, i));
+                        this.gamePageData.playerBoard.shoot(new Square(j, i));
 
                         ((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
 
-                        playerBoard.updateGrid();
+                        this.gamePageData.playerBoard.updateGrid();
 
                         aiMove();
                     }
@@ -201,8 +197,8 @@ namespace BattleShip
         {
             idleTimeDispatcher.Stop();
             battleGrid.IsEnabled = false;
-            aiBoard.shoot(ai.MakeMove(aiBoard));
-            aiBoard.updateGrid();
+            this.gamePageData.aiBoard.shoot(this.gamePageData.ai.MakeMove(this.gamePageData.aiBoard));
+            this.gamePageData.aiBoard.updateGrid();
             turnCount++;
             battleGrid.IsEnabled = true;
             idleTimeDispatcher.Start();
@@ -211,7 +207,7 @@ namespace BattleShip
         /* Checks the winning condition for each Board */
         private void checkWin()
         {
-            if (aiBoard.isAllShipSunk() || playerBoard.isAllShipSunk())
+            if (this.gamePageData.aiBoard.isAllShipSunk() || this.gamePageData.playerBoard.isAllShipSunk())
             {
                 /* This is temp, will need to go to score page */
                 MessageBox.Show("Win");
@@ -220,7 +216,7 @@ namespace BattleShip
 
         private void Quit()
         {
-            GamePageData gamePageData = new GamePageData();
+            //GamePageData gamePageData = new GamePageData();
         }
 
         private void goToStart()
@@ -230,17 +226,17 @@ namespace BattleShip
 
         private void goToBoatPlacement()
         {
-            this.NavigationService.Navigate(new BoardPlacement(this.boardPlacementData.GetStartPageData()));
+            this.NavigationService.Navigate(new BoardPlacement(this.gamePageData.boardPlacementData.GetStartPageData()));
         }
 
         private void reset()
         {
-            this.NavigationService.Navigate(new Game(this.boardPlacementData));
+            this.NavigationService.Navigate(new Game(this.gamePageData.boardPlacementData));
         }
 
-        private void goToScore(object playerListDB, object game = null)
+        private void goToScore()
         {
-            this.NavigationService.Navigate(new ScoreBoard(playerListDB, game));
+            this.NavigationService.Navigate(new ScoreBoard(this.gamePageData));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace BattleShip
         EASY, MEDIUM, HARD
     }
 
-    abstract class Ai : Player
+    public abstract class Ai : Player
     {
         public abstract Square MakeMove(Board board);
 
@@ -86,7 +86,7 @@ namespace BattleShip
 
     }
 
-    class Easy : Ai
+    public class Easy : Ai
     {
         /**
          * The easy AI pick a move randomly
@@ -100,7 +100,7 @@ namespace BattleShip
     }
 
 
-    class Medium : Ai
+    public class Medium : Ai
     {
         /**
          * Medium level AI checks every square to see if an ships are hit but not sunk, 
@@ -121,7 +121,7 @@ namespace BattleShip
         }
     }
 
-    class Hard : Ai
+    public class Hard : Ai
     {
         /**
          * Hard level AI checks every square to see if an ships are hit but not sunk, 

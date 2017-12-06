@@ -9,7 +9,7 @@ using System.Windows.Controls;
 namespace BattleShip
 {
     
-    class Board
+    public class Board
     {
         /* 2D array of all the squares */
         private Square[,] squares;
