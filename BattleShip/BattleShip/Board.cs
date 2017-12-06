@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BattleShip
@@ -12,16 +13,13 @@ namespace BattleShip
     {
         /* 2D array of all the squares */
         private Square[,] squares;
-<<<<<<< HEAD
-        int available = 100;
-=======
-        private Grid grid;
 
->>>>>>> Let me out!
+        int available = 100;
+        public Grid grid;
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/
-        public Board()
+        public Board(Grid grid)
         {
             int numX = BoardLimit.Get().maxX() - BoardLimit.Get().minX() + 1;
             int numY = BoardLimit.Get().maxY() - BoardLimit.Get().minY() + 1;
@@ -34,6 +32,8 @@ namespace BattleShip
                     this.squares[i, j] = new Square(i, j);
                 }
             }
+
+            this.grid = grid;
         }
 
         public void placeShip(Ship toPlace)
@@ -73,6 +73,42 @@ namespace BattleShip
             }
 
             throw new ArgumentException(square.ToString() + "\nIs not on board");
+        }
+
+        public void updateGrid()
+        {
+            for (int i = 0; i < this.squares.GetLength(0); i++)
+            {
+                for (int j = 0; j < this.squares.GetLength(1); j++)
+                {
+                    bool ship = this.squares[j, i].isShip();
+                    bool shot = this.squares[j, i].isShot();
+
+                    if (!ship && !shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "";
+                    }
+                    else if (!ship && shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "X";
+                    }
+                    else if (ship && !shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "O";
+                    }
+                    else
+                    {
+                        if (this.squares[j, i].hasShipSunk())
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "-";
+                        }
+                        else
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "Q";
+                        }
+                    }
+                }
+            }
         }
 
         public override String ToString()

@@ -11,11 +11,70 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Frame x:Name="mainFrame" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517"/>
+<<<<<<< HEAD
         <Label x:Name="timeLbl" Content="" HorizontalAlignment="Left" Margin="57,64,0,0" VerticalAlignment="Top"/>
         <Label x:Name="testLbl" Content="" HorizontalAlignment="Left" Margin="248,213,0,0" VerticalAlignment="Top"/>
         <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="223,167,0,0" VerticalAlignment="Top" Width="75" Click="ButtonBase_OnClick"/>
         <Button x:Name="noNameBtn" Content="Continue" HorizontalAlignment="Left" Margin="426,187,0,0" VerticalAlignment="Top" Width="75" Click="noNameBtn_Click"/>
 >>>>>>> Let me out!
+=======
+        <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="227,35,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Grid x:Name="battleGrid" HorizontalAlignment="Left" Height="200" Margin="307,10,0,0" VerticalAlignment="Top" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="aiGrid" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button x:Name="gridBtn" Content="Disable" HorizontalAlignment="Left" Margin="227,10,0,0" VerticalAlignment="Top" Width="75" Click="gridBtn_Click"/>
+        <Button x:Name="winBtn" Content="Win!" HorizontalAlignment="Left" Margin="227,60,0,0" VerticalAlignment="Top" Width="76" Click="winBtn_Click"/>
+        <Label x:Name="testLbl" Content="" HorizontalAlignment="Left" Margin="140,210,0,0" VerticalAlignment="Top"/>
+>>>>>>> Commiting rn mates
 
 	<Grid x:Name="maingrid" >
         <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="870"/>

@@ -23,12 +23,11 @@ namespace BattleShip
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int timeSec = 50;
-        private int timeMin = 59;
-        private int timeHour = 0;
+        Board aiBoard;
+        Board playerBoard;
+        Player ai;
 
-        bool played = false;
-        int result = 0;
+        int counter = 0;
 
         public MainWindow()
         {
@@ -37,75 +36,28 @@ namespace BattleShip
             goToStartPage();
 =======
 
-            DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
-
-            
-
-        }
-
-        public void Function()
-        {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += TimeConsumingFunction;
-            var frame = new DispatcherFrame();
-            worker.RunWorkerCompleted += (sender, args) =>
+            for (int i = 0; i < 10; i++)
             {
-                frame.Continue = false;
-                testLbl.Content = (string)args.Result;
-                Console.WriteLine((string)args.Result);
-            };
-            worker.RunWorkerAsync();
-            Dispatcher.PushFrame(frame);
-        }
+                for (int j = 0; j < 10; j++)
+                {
+                    Button inGrid = new Button();
+                    inGrid.Click += Button_Click;
 
-        private void TimeConsumingFunction(object sender, DoWorkEventArgs e)
-        {
-            Console.WriteLine("Entering");
-            while(!played)
-            {
-                Thread.Sleep(1000);
+                    battleGrid.Children.Add(inGrid);
+                    Grid.SetRow(inGrid, i);
+                    Grid.SetColumn(inGrid, j);
+                }
             }
-            played = false;
-            e.Result = "I played";
-        }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            testLbl.Content = "Start playing";
-            for(int i = 0; i < 5; i++)
-            {
-                Function();
-                Thread.Sleep(9000);
-                testLbl.Content = "It played";
-            }
-        }
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            timeLbl.Content = getTime();
-        }
-
-        private string getTime()
-        {
-            if(timeSec >= 60)
-            {
-                timeSec = 0;
-                timeMin++;
-            }
-            if(timeMin >= 60)
-            {
-                timeMin = 0;
-                timeHour++;
-            }
-            string toReturn = ((timeHour != 0)?(timeHour + " h "):("")) +  ((timeMin != 0)?(timeMin + " min "):("")) + ((timeSec != 0)?(timeSec + " sec"):(""));
-
+<<<<<<< HEAD
             timeSec++;
 
             return toReturn;
 >>>>>>> Let me out!
+=======
+            aiBoard = new Board(battleGrid);
+            playerBoard = new Board(aiGrid);
+>>>>>>> Commiting rn mates
         }
 
         public void goToStartPage()
@@ -126,14 +78,51 @@ namespace BattleShip
 	}
 =======
 
-        private void testBtn_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("You clicked me!");
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Equals((Button)sender))
+                    {
+                        try
+                        {
+                            aiBoard.shoot(new Square(j, i));
+
+                            ((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
+
+                            aiBoard.updateGrid();
+
+                            battleGrid.IsEnabled = false;
+                            playerBoard.shoot(ai.MakeMove(playerBoard));
+                            battleGrid.IsEnabled = true;
+                        }
+                        catch(Exception exc)
+                        {
+                            testLbl.Content = "Please try again";
+                        }
+                    }
+                }
+            }
         }
 
-        private void noNameBtn_Click(object sender, RoutedEventArgs e)
+        private void simulateMove()
         {
-            played = true;
+            for (int i = 0; i < 99; i++) for (int j = 0; j < 99; j++) for (int k = 0; k < 99; k++) ;
+        }
+
+        private void gridBtn_Click(object sender, RoutedEventArgs e)
+        {
+            battleGrid.IsEnabled = !battleGrid.IsEnabled;
+            if(battleGrid.IsEnabled)
+            {
+                gridBtn.Content = "Disable";
+            }
+            else
+            {
+                gridBtn.Content = "Enable";
+            }
         }
     }
 >>>>>>> Let me out!
