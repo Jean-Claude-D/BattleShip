@@ -30,6 +30,7 @@ namespace BattleShip
         public MainWindow()
         {
             InitializeComponent();
+            completeClean();
             battleboard = new Board();
 
             for (int i = 0; i < 5; i++)
@@ -66,11 +67,12 @@ namespace BattleShip
             moving = 1;
         }
 
-        /*Event: Click
+        /*
+        Event: Click
          *Summary: A lot of code stoled that find the row and column 
          * of a grid space when it's clicked
-         * 
-         */
+         */ 
+        
         private void click(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(battleGrid);
@@ -97,9 +99,19 @@ namespace BattleShip
                     break;
                 col++;
             }
-            rotate(findShip(row, col));
-        }
 
+            if (e.ClickCount == 1) // for double-click, remove this condition if only want single click
+            {
+                //rotate(findShip(row, col));
+            }
+           else if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
+           {
+                //rotate(findShip(row, col));
+           }
+
+        }
+      
+       
         private void reset_Click(object sender, RoutedEventArgs e)
         {
             completeClean();
@@ -253,7 +265,7 @@ namespace BattleShip
         }
 
         /*Void, no params
-		 *Summary: Cleans the grid, replacing any label by ""
+		 *Summary: Cleans the grid, replacing any Button by ""
 		 * 
 		 */
         private void completeClean()
@@ -262,13 +274,13 @@ namespace BattleShip
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    Label dynamicLabel = new Label();
+                   Button dynamicButton = new Button();
 
-                    battleGrid.Children.Add(dynamicLabel);
-                    Grid.SetRow(dynamicLabel, i);
-                    Grid.SetColumn(dynamicLabel, j);
-
-                    ((Label)battleGrid.Children.Cast<UIElement>().First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == j)).Content = ("");
+                    battleGrid.Children.Add(dynamicButton);
+                    Grid.SetRow(dynamicButton, i);
+                    Grid.SetColumn(dynamicButton, j);
+                   
+                    ((Button)battleGrid.Children.Cast<UIElement>().First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == j)).Content = ("");
                 }
             }
         }
@@ -329,7 +341,7 @@ namespace BattleShip
 
         /*Params: int width: Width of the boat we're drawing
 		 *		  int length: Length of the boat we're drawing
-		 *		  char a: char we are going to draw inside the label
+		 *		  char a: char we are going to draw inside the Button
 		 *Summary: Draws a ship of the width and length indicated in the Grid
 		 * 
 		 */
@@ -339,12 +351,12 @@ namespace BattleShip
             {
                 for (int j = 0; j < width[boat]; j++)
                 {
-                    Label dynamicLabel = new Label();
-                    battleGrid.Children.Add(dynamicLabel);
-                    Grid.SetRow(dynamicLabel, i + posy[boat]);
-                    Grid.SetColumn(dynamicLabel, j + posx[boat]);
-
-                    ((Label)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i + posy[boat] && Grid.GetColumn(f) == j + posx[boat])).Content = a;
+                    Button dynamicButton = new Button();
+                    battleGrid.Children.Add(dynamicButton);
+                    Grid.SetRow(dynamicButton, i + posy[boat]);
+                    Grid.SetColumn(dynamicButton, j + posx[boat]);
+                    dynamicButton.Content = a;
+                    ((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i + posy[boat] && Grid.GetColumn(f) == j + posx[boat])).Content = a;
 
                 }
             }
