@@ -37,6 +37,7 @@ namespace BattleShip
 
             /* Get a listing of all the files in the directory and deserialize each */
             string[] allFiles = Directory.GetFiles(this.dirPath);
+            this.saves = new List<GamePageData>();
             foreach(string file in allFiles)
             {
                 saves.Add(SerializeUtilities<GamePageData>.Deserialize(file));

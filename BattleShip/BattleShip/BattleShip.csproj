@@ -65,9 +65,11 @@
     <Compile Include="GamePageData.cs" />
     <Compile Include="Narrator.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="playerDB.cs" />
     <Compile Include="ScoreBoard.xaml.cs">
       <DependentUpon>ScoreBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SerializeUtilities.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="StartPage.xaml.cs">
