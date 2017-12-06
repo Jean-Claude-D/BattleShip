@@ -20,13 +20,27 @@ namespace BattleShip
     /// </summary>
     public partial class Game : Page
     {
+        readonly BoardPlacementData boardPlacementData;
+        private int currIdleTimeLeft;
+        private int currTime; //With the DispatcherTimer
+        private int turnCount; //incremented in aiMove, because AI will always play
+
         /*The Board the player shoots on*/
         Board playerBoard;
+        /*The Board the ai shoots on*/
         Board aiBoard;
-        Player ai;
 
-        public Game(Object obj)
+        Ai ai;
+
+        public Game(GamePageData gamePageData)
         {
+            InitializeComponent();
+        }
+
+        public Game(BoardPlacementData boardPlacementData)
+        {
+            this.boardPlacementData = boardPlacementData;
+
             InitializeComponent();
 
             for (int i = 0; i < 10; i++)
@@ -54,25 +68,33 @@ namespace BattleShip
                 }
             }
 
-            ai = new Easy();
+            switch(boardPlacementData.getLevel())
+            {
+                case AiLevel.EASY:
+                    ai = new Easy();
+                    break;
+                case AiLevel.MEDIUM:
+                    ai = new Medium();
+                    break;
+                case AiLevel.HARD:
+                    ai = new Hard();
+                    break;
+                default:
+                    throw new NotSupportedException("Ai unknown");
+            }
+
             aiBoard = new Board(battleGrid_Copy);
-            playerBoard = new Board(battleGrid);
-
-            aiBoard.placeShip(new Ship(new Square[] { new Square(0, 1), new Square(0, 2) }));
-            aiBoard.placeShip(new Ship(new Square[] { new Square(5, 6), new Square(6, 6), new Square(7, 6) }));
-            aiBoard.placeShip(new Ship(new Square[] { new Square(9, 9), new Square(8, 9) , new Square(7, 9) , new Square(6, 9) }));
-            aiBoard.placeShip(new Ship(new Square[] { new Square(3, 4), new Square(3, 3) , new Square(3, 2) , new Square(3, 1) }));
-            aiBoard.placeShip(new Ship(new Square[] { new Square(1, 8), new Square(1, 7), new Square(1, 6), new Square(1, 5) , new Square(1, 4) }));
-
-            playerBoard.placeShip(new Ship(new Square[] { new Square(0, 1), new Square(0, 2) }));
-            playerBoard.placeShip(new Ship(new Square[] { new Square(5, 6), new Square(6, 6), new Square(7, 6) }));
-            playerBoard.placeShip(new Ship(new Square[] { new Square(9, 9), new Square(8, 9), new Square(7, 9), new Square(6, 9) }));
-            playerBoard.placeShip(new Ship(new Square[] { new Square(3, 4), new Square(3, 3), new Square(3, 2), new Square(3, 1) }));
-            playerBoard.placeShip(new Ship(new Square[] { new Square(1, 8), new Square(1, 7), new Square(1, 6), new Square(1, 5), new Square(1, 4) }));
-
-
             battleGrid_Copy.IsEnabled = false;
+            for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
+            {
+                aiBoard.placeShip(boardPlacementData.getAiShip()[i]);
+            }
 
+            playerBoard = new Board(battleGrid);
+            for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
+            {
+                aiBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
+            }
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
@@ -90,14 +112,21 @@ namespace BattleShip
 
                         playerBoard.updateGrid();
 
-                        battleGrid.IsEnabled = false;
-                        aiBoard.shoot(ai.MakeMove(aiBoard));
-                        aiBoard.updateGrid();
-                        battleGrid.IsEnabled = true;
+                        aiMove();
                     }
                 }
             }
             checkWin();
+        }
+
+        /* The ai plays a move can be called by Button_Click and when the user's idle time is over */
+        private void aiMove()
+        {
+            battleGrid.IsEnabled = false;
+            aiBoard.shoot(ai.MakeMove(aiBoard));
+            aiBoard.updateGrid();
+            turnCount++;
+            battleGrid.IsEnabled = true;
         }
 
         /* Checks the winning condition for each Board */
@@ -110,19 +139,24 @@ namespace BattleShip
             }
         }
 
+        private void Quit()
+        {
+            GamePageData gamePageData = new GamePageData();
+        }
+
         private void goToStart()
         {
             this.NavigationService.Navigate(new StartPage());
         }
 
-        private void goToBoatPlacement(object setting)
+        private void goToBoatPlacement()
         {
-            this.NavigationService.Navigate(new BoardPlacement(setting));
+            this.NavigationService.Navigate(new BoardPlacement(this.boardPlacementData.GetStartPageData()));
         }
 
-        private void reset(object game)
+        private void reset()
         {
-            this.NavigationService.Navigate(new Game(game));
+            this.NavigationService.Navigate(new Game(this.boardPlacementData));
         }
 
         private void goToScore(object playerListDB, object game = null)

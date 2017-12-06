@@ -29,14 +29,15 @@ namespace BattleShip
 			newBtn.Visibility = Visibility.Hidden;
 		}
 
-		public void goToBoatPlacement(object setting)
+		private void goToBoatPlacement(StartPageData data)
 		{
-			this.NavigationService.Navigate(new BoardPlacement(setting));
+			this.NavigationService.Navigate(new BoardPlacement(data));
 		}
 
-		public void goToGame(object game)
+		private void goToGame(string playerFileName)
 		{
-			this.NavigationService.Navigate(new Game(game));
+            //Load and deserialize file at playerFileName
+			this.NavigationService.Navigate(new Game(new GamePageData()));
 		}
 
         /**

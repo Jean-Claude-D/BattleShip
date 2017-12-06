@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
-    class Ship
+    public class Ship
     {
         public Square[] position;
         private bool isSunk;
@@ -25,6 +25,17 @@ namespace BattleShip
             }
 
             this.isSunk = false;
+        }
+
+        /* Deep copies a Ship, used in BoardPlacementData to make sure that Ship placed on BoardPlacement Page are not the same as in Game*/
+        public Ship(Ship toCopy)
+        {
+            /* Array copying */
+            this.position = new Square[toCopy.position.Length];
+            for(int i = 0; i < this.position.Length; i++)
+            {
+                this.position[i] = toCopy.position[i];
+            }
         }
 
         public bool getShot(Square square)
