@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace BattleShip
 {
@@ -11,11 +13,13 @@ namespace BattleShip
     {
         /* 2D array of all the squares */
         private Square[,] squares;
+
         int available = 100;
+        public Grid grid;
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/
-        public Board()
+        public Board(Grid grid)
         {
             int numX = BoardLimit.Get().maxX() - BoardLimit.Get().minX() + 1;
             int numY = BoardLimit.Get().maxY() - BoardLimit.Get().minY() + 1;
@@ -28,6 +32,30 @@ namespace BattleShip
                     this.squares[i, j] = new Square(i, j);
                 }
             }
+
+            this.grid = grid;
+        }
+
+        /* Returns true if all the Square in this Board's squares are either empty or contain a Ship that is completely sunk 
+                   false otherwise*/
+        public bool isAllShipSunk()
+        {
+            /* Iterate through each Square in this Board's squares*/
+            foreach (Square boardSquare in this.squares)
+            {
+                /* If there is no a Ship on boardSquare, do nothing */
+                if (boardSquare.isShip())
+                {
+                    /* If there is a Ship on boardSquare, it has to be sunk*/
+                    if (!boardSquare.hasShipSunk())
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            /* At this point, all the Square in this Board's squares are either empty or contain a Ship that is completely sunk*/
+            return true;
         }
 
         public void placeShip(Ship toPlace)
@@ -67,6 +95,42 @@ namespace BattleShip
             }
 
             throw new ArgumentException(square.ToString() + "\nIs not on board");
+        }
+
+        public void updateGrid()
+        {
+            for (int i = 0; i < this.squares.GetLength(0); i++)
+            {
+                for (int j = 0; j < this.squares.GetLength(1); j++)
+                {
+                    bool ship = this.squares[j, i].isShip();
+                    bool shot = this.squares[j, i].isShot();
+
+                    if (!ship && !shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "";
+                    }
+                    else if (!ship && shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "X";
+                    }
+                    else if (ship && !shot)
+                    {
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "O";
+                    }
+                    else
+                    {
+                        if (this.squares[j, i].hasShipSunk())
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "-";
+                        }
+                        else
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "Q";
+                        }
+                    }
+                }
+            }
         }
 
         public override String ToString()
@@ -122,9 +186,9 @@ namespace BattleShip
             Square[] avail = new Square[available];
             int k = 0;
 
-            for (int i = 0; i < this.squares.Length; i++)
+            for (int i = 0; i < this.squares.GetLength(0); i++)
             {
-                for (int j = 0; j < this.squares.Length; j++)
+                for (int j = 0; j < this.squares.GetLength(1); j++)
                 {
                     if (!this.squares[i, j].isShot())
                     {
