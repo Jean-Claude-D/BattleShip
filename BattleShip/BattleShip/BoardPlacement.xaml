@@ -6,52 +6,56 @@
       xmlns:local="clr-namespace:BattleShip"
       mc:Ignorable="d" 
       d:DesignHeight="300"
-      Title="BoardPlacement" Height="528.107" Width="878.107">
-    <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000019" Margin="0,-1,0,1">
-        <Border  BorderBrush="Black" BorderThickness="2" Margin="37,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0A0036" >
-            <Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </Border>
-        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="730,404,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-        <Button x:Name="restartBtn" Content="Restart" HorizontalAlignment="Left" Margin="615,404,0,0" VerticalAlignment="Top" Width="94" Height="26" Click="restartBtn_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="495,324,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="71" Width="336" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
-        <Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="507,404,0,0" VerticalAlignment="Top" Width="87" Height="26" Click="goBtn_Click"/>
-        <ComboBox x:Name="levelCBox" HorizontalAlignment="Left" Margin="730,207,0,0" VerticalAlignment="Top" Width="101">
-            <ComboBoxItem Content="Easy" IsSelected="True"/>
-            <ComboBoxItem Content="Medium"/>
-            <ComboBoxItem Content="Hard"/>
-        </ComboBox>
-        <ComboBox x:Name="timerCBox" HorizontalAlignment="Left" Margin="730,249,0,0" VerticalAlignment="Top" Width="101">
-            <ComboBoxItem Content="10" IsSelected="True"/>
-            <ComboBoxItem Content="30"/>
-            <ComboBoxItem Content="40"/>
-        </ComboBox>
-        <Label Content="AI difficulty" HorizontalAlignment="Left" Margin="507,203,0,0" VerticalAlignment="Top" Width="202" FontFamily="OCR A Extended" Height="37" Foreground="White" FontSize="18"/>
-        <Label Content="Idle time (sec)" HorizontalAlignment="Left" Margin="507,245,0,0" VerticalAlignment="Top" Width="202" FontFamily="OCR A Extended" Height="26" Foreground="White" FontSize="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="520,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="OCR A Extended" Height="72" Width="302" FontSize="50" Foreground="White"><Run Text="BATTLESHI"/><Run Text="P"/></TextBlock>
-    </Grid>
+      Title="BoardPlacement" Height="528.107" Width="878.107" KeyDown="movement">
+
+
+	<Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000019" Margin="0,-1,0,1">
+		<Border  BorderBrush="Black" BorderThickness="2" Margin="37,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0A0036" >
+			<Grid x:Name="battleGrid" ShowGridLines="True" HorizontalAlignment="Left" Height="422" Margin="0" VerticalAlignment="Top" Width="422" OpacityMask="Black" PreviewMouseLeftButtonDown="click" >
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+			</Grid>
+		</Border>
+		<Button Content="Save/Quit" HorizontalAlignment="Left" Margin="721,405,0,0" VerticalAlignment="Top" Width="101" Height="26" Background="#FF000019" BorderBrush="#FF8A64EE" Foreground="#FF8A64EE"/>
+		<Button x:Name="restartBtn" Content="Restart" HorizontalAlignment="Left" Margin="606,405,0,0" VerticalAlignment="Top" Width="94" Height="26" Background="#FF000019" BorderBrush="#FF8A64EE" Foreground="#FF8A64EE" Click="restartBtn_Click"/>
+		<TextBlock x:Name="narratorTxt" HorizontalAlignment="Left" Margin="486,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="382" FontSize="14" RenderTransformOrigin="-0.598,-0.178" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
+		<Button x:Name="goBtn" Content="Go!" HorizontalAlignment="Left" Margin="498,405,0,0" VerticalAlignment="Top" Width="87" Height="26" Background="#FF000019" BorderBrush="#FF8A64EE" Foreground="#FF8A64EE" Click="goBtn_Click" IsCancel="True"/>
+		<ComboBox x:Name="levelCBox" HorizontalAlignment="Left" Margin="730,207,0,0" VerticalAlignment="Top" Width="101"  >
+			<ComboBoxItem Content="Easy" IsSelected="True"/>
+			<ComboBoxItem Content="Medium"/>
+			<ComboBoxItem Content="Hard"/>
+		</ComboBox>
+		<ComboBox x:Name="timerCBox" HorizontalAlignment="Left" Margin="730,249,0,0" VerticalAlignment="Top" Width="101" BorderBrush="#FFACACAC" >
+			<ComboBoxItem Content="10" IsSelected="True"/>
+			<ComboBoxItem Content="30"/>
+			<ComboBoxItem Content="40"/>
+		</ComboBox>
+		<Label Content="AI difficulty" HorizontalAlignment="Left" Margin="507,203,0,0" VerticalAlignment="Top" Width="202" FontFamily="OCR A Extended" Height="37" Foreground="White" FontSize="18"/>
+		<Label Content="Idle time (sec)" HorizontalAlignment="Left" Margin="507,245,0,0" VerticalAlignment="Top" Width="202" FontFamily="OCR A Extended" Height="26" Foreground="White" FontSize="18"/>
+		<TextBlock HorizontalAlignment="Left" Margin="520,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="OCR A Extended" Height="72" Width="302" FontSize="50" Foreground="White"><Run Text="BATTLESHI"/><Run Text="P"/></TextBlock>
+		<Button x:Name="shuffle" Content="Shuffle Board" HorizontalAlignment="Left" Margin="606,444,0,0" VerticalAlignment="Top" Width="94" Height="26" Background="#FF000019" BorderBrush="#FF8A64EE" Foreground="#FF8A64EE"  Click="shuffling"/>
+	</Grid>
 </Page>

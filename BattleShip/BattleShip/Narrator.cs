@@ -39,7 +39,7 @@ namespace BattleShip
             string text = name + "! There you are!" + "\n"
                 + "We've been waiting for you to for ages..." + "\n"
                 + "Would you like to continue where you left off?";
-            Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
+            Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 3));
         }
 
         /**
@@ -52,18 +52,31 @@ namespace BattleShip
         {
             string text = name + ", there you are" + "\n"
                 + "Which level would you like to play this time?";
-            Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
+            Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 3));
         }
 		/**
 		 * Text displayed after a player enters their name if they're new.
 		 * 
-		 * @author karina
+		 * @author Simon
 		 **/
 		public static void newName(TextBlock msgTxt, string name)
 		{
-			string text = "Hi" + name + "\n"
-				+ "something something new person?";
-			Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
+			string text = "Hi " + name + "\nIs this your very first time playing?";
+
+			Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 3));
 		}
+
+		/* Text displayed while player places ships and other
+		 * 
+		 * @author Simon
+		 **/
+		public static void placing(TextBlock msgTxt, string name)
+		{
+			string text =( "Alright " + name + ". Click on a ship to select it. Once selected use the arrow keys to move it!" +
+				"\nDouble click it to rotate it. ");
+
+			Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 3));
+		}
+
 	}
 }
