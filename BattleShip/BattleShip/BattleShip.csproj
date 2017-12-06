@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ai.cs" />
     <Compile Include="Animations.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="BoardLimit.cs" />
@@ -61,6 +62,7 @@
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
     <Compile Include="Narrator.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="ScoreBoard.xaml.cs">
       <DependentUpon>ScoreBoard.xaml</DependentUpon>
     </Compile>
