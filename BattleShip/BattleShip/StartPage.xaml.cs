@@ -29,14 +29,15 @@ namespace BattleShip
 			newBtn.Visibility = Visibility.Hidden;
 		}
 
-		public void goToBoatPlacement(object setting)
+		private void goToBoatPlacement(StartPageData data)
 		{
-			this.NavigationService.Navigate(new BoardPlacement(setting));
+			this.NavigationService.Navigate(new BoardPlacement(data));
 		}
 
-		public void goToGame(object game)
+		private void goToGame(string playerFileName)
 		{
-			this.NavigationService.Navigate(new Game(game));
+            //Load and deserialize file at playerFileName
+			this.NavigationService.Navigate(new Game(new GamePageData()));
 		}
 
         /**
@@ -71,12 +72,12 @@ namespace BattleShip
 
 		private void newBtn_Click(object sender, RoutedEventArgs e)
 		{
-			goToBoatPlacement(new object());
+			goToBoatPlacement(new StartPageData(nameTxt.Text));
 			//new game code
 		}
 		private void continueBtn_Click(object sender, RoutedEventArgs e)
 		{
-			goToGame(new object());
+			goToGame(nameTxt.Text + ".ser");
 			//load game code
 		}
 	}

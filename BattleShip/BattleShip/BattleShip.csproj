@@ -58,9 +58,11 @@
     <Compile Include="Animations.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="BoardLimit.cs" />
+    <Compile Include="BoardPlacementData.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GamePageData.cs" />
     <Compile Include="Narrator.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ScoreBoard.xaml.cs">
@@ -71,6 +73,7 @@
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartPageData.cs" />
     <Page Include="BoardPlacement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
