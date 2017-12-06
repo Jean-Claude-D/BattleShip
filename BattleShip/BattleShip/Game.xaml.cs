@@ -93,7 +93,7 @@ namespace BattleShip
             playerBoard = new Board(battleGrid);
             for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
             {
-                aiBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
+                playerBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
             }
         }
 

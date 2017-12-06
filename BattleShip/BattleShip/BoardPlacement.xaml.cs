@@ -47,7 +47,7 @@ namespace BattleShip
         private void goBtn_Click(object sender, RoutedEventArgs e)
         {
             AiLevel currSelectionLevel = (AiLevel)Enum.Parse(typeof(AiLevel), ((string)((ComboBoxItem)levelCBox.SelectedItem).Content).ToUpper());
-            int currSelectionTime = int.Parse((string)((ComboBoxItem)timerCBox.SelectedItem).Content));
+            int currSelectionTime = int.Parse((string)((ComboBoxItem)timerCBox.SelectedItem).Content);
 
             goToGame(new BoardPlacementData(this.startPageData, this.playerShips, this.aiShips, currSelectionLevel, currSelectionTime));
         }

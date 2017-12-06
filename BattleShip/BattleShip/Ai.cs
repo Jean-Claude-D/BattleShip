@@ -33,45 +33,45 @@ namespace BattleShip
         {
             Square[,] squares = board.AllSquares();
             //SIMPLIFY
-            for (int i = 0; i < squares.Length; i++)
+            for (int i = 0; i < squares.GetLength(0); i++)
             {
-                for (int j = 0; j < squares.Length; j++)
+                for (int j = 0; j < squares.GetLength(1); j++)
                 {
                     if (board.IsShipShotNotSunk(i, j))
                     {
-                        if (board.IsShipShotNotSunk(i + 1, j))
+                        if (i + 1 < squares.Length && board.IsShipShotNotSunk(i + 1, j))
                         {
                             int index = i + 2;
-                            while (board.IsShipShotNotSunk(index, j))
+                            while (index < squares.Length && board.IsShipShotNotSunk(index, j))
                             {
                                 index++;
                             }
                             return squares[index, j];
                         }
 
-                        if (board.IsShipShotNotSunk(i - 1, j))
+                        if (i - 1 > 0 && board.IsShipShotNotSunk(i - 1, j))
                         {
                             int index = i - 2;
-                            while (board.IsShipShotNotSunk(index, j))
+                            while (index > 0 && board.IsShipShotNotSunk(index, j))
                             {
                                 index--;
                             }
                             return squares[index, j];
                         }
 
-                        if (board.IsShipShotNotSunk(i, j + 1))
+                        if (j + 1 < squares.Length && board.IsShipShotNotSunk(i, j + 1))
                         {
                             int index = j + 2;
-                            while (board.IsShipShotNotSunk(i, index))
+                            while (index < squares.Length && board.IsShipShotNotSunk(i, index))
                             {
                                 index++;
                             }
                             return squares[i, index];
                         }
-                        if (board.IsShipShotNotSunk(i, j - 1))
+                        if (j - 1 > 0 && board.IsShipShotNotSunk(i, j - 1))
                         {
                             int index = j - 2;
-                            while (board.IsShipShotNotSunk(i, index))
+                            while (index > 0 && board.IsShipShotNotSunk(i, index))
                             {
                                 index--;
                             }

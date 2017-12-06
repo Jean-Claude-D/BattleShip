@@ -34,7 +34,7 @@ namespace BattleShip
             mainFrame.NavigationService.Navigate(new StartPage());
         }
 
-        public void goToGame(object boardPlacement)
+        public void goToGame(BoardPlacementData boardPlacement)
         {
             mainFrame.NavigationService.Navigate(new Game(boardPlacement));
         }
