@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace BattleShip
@@ -89,7 +79,7 @@ namespace BattleShip
                 }
             }
 
-            switch(boardPlacementData.getLevel())
+            switch (boardPlacementData.getLevel())
             {
                 case AiLevel.EASY:
                     ai = new Easy();
@@ -133,7 +123,7 @@ namespace BattleShip
         private void playerTurn_Tick(object sender, EventArgs e)
         {
             /* If the user runs out of time... */
-            if(--this.currIdleTimeLeft <= 0)
+            if (--this.currIdleTimeLeft <= 0)
             {
                 /* ... Let the AI play*/
                 aiMove();
@@ -221,7 +211,7 @@ namespace BattleShip
         /* Checks the winning condition for each Board */
         private void checkWin()
         {
-            if(aiBoard.isAllShipSunk() || playerBoard.isAllShipSunk())
+            if (aiBoard.isAllShipSunk() || playerBoard.isAllShipSunk())
             {
                 /* This is temp, will need to go to score page */
                 MessageBox.Show("Win");
