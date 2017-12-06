@@ -40,12 +40,6 @@ namespace BattleShip
 
         public Game(BoardPlacementData boardPlacementData)
         {
-            InitializeComponent();
-        }
-
-        public Game(BoardPlacementData boardPlacementData)
-        {
-            this.boardPlacementData = boardPlacementData;
 
             InitializeComponent();
 
@@ -74,12 +68,8 @@ namespace BattleShip
                 }
             }
 
-<<<<<<< BattleShip/BattleShip/Game.xaml.cs
             Ai ai;
             switch (boardPlacementData.getLevel())
-=======
-            switch(boardPlacementData.getLevel())
->>>>>>> BattleShip/BattleShip/Game.xaml.cs
             {
                 case AiLevel.EASY:
                     ai = new Easy();
@@ -93,7 +83,6 @@ namespace BattleShip
                 default:
                     throw new NotSupportedException("Ai unknown");
             }
-<<<<<<< BattleShip/BattleShip/Game.xaml.cs
 
             Board aiBoard = new Board(battleGrid_Copy);
             battleGrid_Copy.IsEnabled = false;
@@ -158,21 +147,6 @@ namespace BattleShip
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             timer.Content = getTime();
-=======
-
-            aiBoard = new Board(battleGrid_Copy);
-            battleGrid_Copy.IsEnabled = false;
-            for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
-            {
-                aiBoard.placeShip(boardPlacementData.getAiShip()[i]);
-            }
-
-            playerBoard = new Board(battleGrid);
-            for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
-            {
-                playerBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
-            }
->>>>>>> BattleShip/BattleShip/Game.xaml.cs
         }
 
         private string getTime()
@@ -222,7 +196,6 @@ namespace BattleShip
         /* The ai plays a move can be called by Button_Click and when the user's idle time is over */
         private void aiMove()
         {
-<<<<<<< BattleShip/BattleShip/Game.xaml.cs
             idleTimeDispatcher.Stop();
             battleGrid.IsEnabled = false;
             this.gamePageData.aiBoard.shoot(this.gamePageData.ai.MakeMove(this.gamePageData.aiBoard));
@@ -230,13 +203,6 @@ namespace BattleShip
             turnCount++;
             battleGrid.IsEnabled = true;
             idleTimeDispatcher.Start();
-=======
-            battleGrid.IsEnabled = false;
-            aiBoard.shoot(ai.MakeMove(aiBoard));
-            aiBoard.updateGrid();
-            turnCount++;
-            battleGrid.IsEnabled = true;
->>>>>>> BattleShip/BattleShip/Game.xaml.cs
         }
 
         /* Checks the winning condition for each Board */
@@ -251,15 +217,11 @@ namespace BattleShip
 
         private void Quit()
         {
-<<<<<<< BattleShip/BattleShip/Game.xaml.cs
             /* Writes the correct time and turn count in GamePageData */
             updateGamePageData();
 
             PlayerDB.getDB().saveGame(this.gamePageData);
             MainWindow.exit();
-=======
-            GamePageData gamePageData = new GamePageData();
->>>>>>> BattleShip/BattleShip/Game.xaml.cs
         }
 
         private void goToStart()
@@ -268,7 +230,6 @@ namespace BattleShip
         }
 
         private void goToBoatPlacement()
-<<<<<<< BattleShip/BattleShip/Game.xaml.cs
         {
             this.NavigationService.Navigate(new BoardPlacement(this.gamePageData.boardPlacementData.GetStartPageData()));
         }
@@ -283,15 +244,6 @@ namespace BattleShip
             /* Writes the correct time and turn count in GamePageData */
             updateGamePageData();
             this.NavigationService.Navigate(new ScoreBoard(this.gamePageData));
-=======
-        {
-            this.NavigationService.Navigate(new BoardPlacement(this.boardPlacementData.GetStartPageData()));
-        }
-
-        private void reset()
-        {
-            this.NavigationService.Navigate(new Game(this.boardPlacementData));
->>>>>>> BattleShip/BattleShip/Game.xaml.cs
         }
 
         private void updateGamePageData()
