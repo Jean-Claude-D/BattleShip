@@ -15,7 +15,7 @@ namespace BattleShip
         private Square[,] squares;
 
         int available = 100;
-        public Grid grid;
+        [NonSerialized]  public Grid grid;
         /* ji = (j * 10) + i */
         /* j = (int)(ji / 10)*/
         /* i = ji - j*/
