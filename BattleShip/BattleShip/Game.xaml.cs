@@ -216,7 +216,11 @@ namespace BattleShip
 
         private void Quit()
         {
-            //GamePageData gamePageData = new GamePageData();
+            /* Writes the correct time and turn count in GamePageData */
+            updateGamePageData();
+
+            PlayerDB.getDB().saveGame(this.gamePageData);
+            MainWindow.exit();
         }
 
         private void goToStart()
@@ -236,7 +240,15 @@ namespace BattleShip
 
         private void goToScore()
         {
+            /* Writes the correct time and turn count in GamePageData */
+            updateGamePageData();
             this.NavigationService.Navigate(new ScoreBoard(this.gamePageData));
+        }
+
+        private void updateGamePageData()
+        {
+            this.gamePageData.setTime(this.currTimeSec, this.currTimeMin, this.currTimeHour);
+            this.gamePageData.setTurnCount(this.turnCount);
         }
     }
 }
