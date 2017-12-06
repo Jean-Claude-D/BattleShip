@@ -40,10 +40,22 @@ namespace BattleShip
                    false otherwise*/
         public bool isAllShipSunk()
         {
-            foreach(Square boardSquare in this.squares)
+            /* Iterate through each Square in this Board's squares*/
+            foreach (Square boardSquare in this.squares)
             {
-                if()
+                /* If there is no a Ship on boardSquare, do nothing */
+                if (boardSquare.isShip())
+                {
+                    /* If there is a Ship on boardSquare, it has to be sunk*/
+                    if (!boardSquare.hasShipSunk())
+                    {
+                        return false;
+                    }
+                }
             }
+
+            /* At this point, all the Square in this Board's squares are either empty or contain a Ship that is completely sunk*/
+            return true;
         }
 
         public void placeShip(Ship toPlace)

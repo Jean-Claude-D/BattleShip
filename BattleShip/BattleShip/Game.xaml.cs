@@ -77,6 +77,7 @@ namespace BattleShip
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
+            checkWin();
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -95,6 +96,17 @@ namespace BattleShip
                         battleGrid.IsEnabled = true;
                     }
                 }
+            }
+            checkWin();
+        }
+
+        /* Checks the winning condition for each Board */
+        private void checkWin()
+        {
+            if(aiBoard.isAllShipSunk() || playerBoard.isAllShipSunk())
+            {
+                /* This is temp, will need to go to score page */
+                MessageBox.Show("Win");
             }
         }
 
