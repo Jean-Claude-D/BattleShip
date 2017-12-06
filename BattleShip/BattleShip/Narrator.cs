@@ -61,8 +61,8 @@ namespace BattleShip
 		 **/
 		public static void newName(TextBlock msgTxt, string name)
 		{
-			string text = "Hi" + name + "\n"
-				+ "something something new person?";
+			string text = "Hi " + name + "\n"
+				+ "Is this your very very first time playing?";
 			Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 5));
 		}
 	}
