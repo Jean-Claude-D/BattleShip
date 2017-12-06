@@ -34,40 +34,11 @@ namespace BattleShip
             completeClean();
             battleboard = new Board();
             battleships = new Ship[5];
-            for (int i = 0; i < 5; i++)
-            {
-                width[i] = 1;
-                posy[i] = 0;
-                posx[i] = 0;
-            }
-            length[0] = 5;
-            length[1] = 4;
-            length[2] = 3;
-            length[3] = 3;
-            length[4] = 2;
+         
             randomize();
         }
-
-        /*Event for testing purposes
-		 *Summary: Draws
-		 * 
-		 * 
-		 */
-
-        /*Temporary event things
-         * 
-         * 
-         */
-        private void Button_Click1(object sender, RoutedEventArgs e)
-        {
-            moving = 0;
-        }
-
-        private void Button_Click2(object sender, RoutedEventArgs e)
-        {
-            moving = 1;
-        }
-
+		
+     
         /*
         Event: Click
          *Summary:Finds the row and column of a grid space when it's clicked
@@ -104,12 +75,12 @@ namespace BattleShip
             if (e.ClickCount == 1) // for double-click, remove this condition if only want single click
             {
                 int temp = (findShip(col, row));
-                if (temp >= 0) moving = temp;
+                if (temp > -1) moving = temp;
             }
            else if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
            {
                 int temp = (findShip(col, row));
-                if (temp >= 0) rotate(temp);
+				if (temp > -1) rotate(temp);
            }
 
         }
@@ -117,7 +88,7 @@ namespace BattleShip
        
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-            completeClean();
+            
             randomize();
         }
 
@@ -134,77 +105,71 @@ namespace BattleShip
             {
                 if (e.Key == Key.Right)
                 {
-                    clear();
+                    clear(moving);
                     posx[moving]++;
                     draw(moving, 'X');
                 }
                 else if (e.Key == Key.Left)
                 {
-                    clear();
+                    clear(moving);
                     posx[moving]--;
                     draw(moving, 'X');
                 }
                 else if (e.Key == Key.Down)
                 {
-                    clear();
+                    clear(moving);
                     posy[moving]++;
                     draw(moving, 'X');
                 }
                 else if (e.Key == Key.Up)
                 {
-                    clear();
+                    clear(moving);
                     posy[moving]--;
                     draw(moving, 'X');
                 }
             }
         }
 
-        /*Rotation event STUB
-		 * Triggered by:  Button being pressed
-		 * Summary: Saves original length and width,
-         * then modifies them to what it would be if the rotation was successful
-         * Checks if it's a valid rotation,
-		 * if it is, it draws itself in the new position
-         * if not it undoes changes to length and width
-		 * 
-		 */
-        private void Rotation_Click(object sender, RoutedEventArgs e)
-        {
-            clear();
-            //Original mesurements
-            int templength = length[moving];
-            int tempwidth = width[moving];
+		private void Create_ships_Click(object sender, RoutedEventArgs e)
+		{
 
-            length[moving] = tempwidth;
-            width[moving] = templength;
+			battleboard = new Board();
+			battleships = new Ship[5];
 
-            if (tempwidth < templength)
-            {
-                if (isInside(moving))
-                {
-                    draw(moving, 'X');
-                }
-                else
-                {
-                    length[moving] = templength;
-                    width[moving] = tempwidth;
-                    draw(moving, 'X');
-                }
-            }
-            else if (tempwidth > templength)
-            {
-                if (isInside(moving))
-                {
-                    draw(moving, 'X');
-                }
-                else
-                {
-                    length[moving] = templength;
-                    width[moving] = tempwidth;
-                    draw(moving, 'X');
-                }
-            }
-        }
+			for (int i = 0; i < width.Length; i++)
+			{
+				Square[] boats = new Square[width[i] + length[i] - 1];
+				for (int j = 0; j < length[i]; j++)
+				{
+					for (int k = 0; k < width[i]; k++)
+					{
+						boats[j + k] = new Square(posx[i]+k,+posy[i]+j);
+
+					}
+				}
+
+				battleships[i] = new Ship(boats);
+				battleboard.placeShip(battleships[i]);
+			}
+			Console.Write(battleboard);
+		}
+
+
+		public void resets()
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				width[i] = 1;
+				posy[i] = 0;
+				posx[i] = 0;
+			}
+			length[0] = 5;
+			length[1] = 4;
+			length[2] = 3;
+			length[3] = 3;
+			length[4] = 2;
+			completeClean();
+		}
 
         /*Randomize()
          * Summary: Randomly places every ship
@@ -214,6 +179,7 @@ namespace BattleShip
 
         public void randomize()
         {
+			resets();
             battleboard = new Board();
             Random rndx = new Random();
             for (int i = 0; i < width.Length; i++)
@@ -228,22 +194,28 @@ namespace BattleShip
                     randomx = rndx.Next(0, 10);
                     randomy = rndx.Next(0, 10);
 
-                    while (randomy + length[i] > 10)
+                    while (randomy + length[i] > 10 || randomx+width[i]>10)
                     {
-                        randomy = rndx.Next(0, 10);
-                    }
 
-                    Square[] boats = new Square[width[i] + length[i] - 1];
+						randomx = rndx.Next(0, 10);
+						randomy = rndx.Next(0, 10);
+                    }
+					
+					Square[] boats = new Square[width[i] + length[i] - 1];
+
+
 
                     for (int j = 0; j < length[i]; j++)
                     {
-                        boats[j] = new Square(randomx, randomy + j);
-                        Console.Write(j);
-                        if (battleboard.isTaken(boats[j]))
-                        {
-                            unique = false;
-                        }
-
+						for (int k = 0; k < width[i]; k++)
+						{
+							boats[j+k] = new Square(randomx+k, randomy + j);
+							Console.Write(j);
+							if (battleboard.isTaken(boats[j+k]))
+							{
+								unique = false;
+							}
+						}
                     }
 
                     if (unique)
@@ -258,10 +230,18 @@ namespace BattleShip
 
             }
 
+			for (int i = 0; i<18; i++)
+			{
+				Random randomship = new Random();
+				rotate(rndx.Next(0, 5));
+			}
+
+
             for (int i = 0; i < width.Length; i++)
             { 
                 draw(i, 'X');
             }
+
 
         }
 
@@ -290,33 +270,42 @@ namespace BattleShip
 		 *Summary: Cleans the place where the boat was previously on
 		 * 
 		 */
-        private void clear()
+        private void clear(int boat)
         {
-            draw(moving, ' ');
+            draw(boat, ' ');
         }
 
-        public int findShip(int x, int y)
-        {
-            for (int i = 0; i < battleships.Length; i++)
-            {
-                      Console.Write("\n " + i + " " + battleboard.getSquare(x, y).getShip().ToString() + " " + battleships[i].ToString());
+		/*int findShip(int x, int y)
+		 * Summary: finds the ship that the (x,y) belongs to
+		 * belongs -1 if not found
+		 * 
+		 * 
+		 */
+		public int findShip(int x, int y)
+		{
 
-                if (battleboard.getSquare(x,y).getShip() == battleships[i])
-                {
-                    return i;
-                }
+			for (int i = 0; i < posy.Length; i++)
+			{
 
-                    
-            }
-            return -1;
-        }
+				for (int j = 0; j < width[i]; j++)
+				{
+					for (int k = 0; k < length[i]; k++)
+					{
+						if (x == posx[i]+j && y == posy[i]+k)
+							return i;
+					}
+				}
+
+			}
+			return -11; //if all tests fail, return true
+		}
 
         public void rotate(int boat)
         {
-            clear();
+            clear(boat);
             //Original mesurements
-            int templength = length[moving];
-            int tempwidth = width[moving];
+            int templength = length[boat];
+            int tempwidth = width[boat];
 
             length[boat] = tempwidth;
             width[boat] = templength;
@@ -460,11 +449,10 @@ namespace BattleShip
 
             for (int i = 0; i < posy.Length; i++)
             {
-                if (posy[boat] + length[boat] <= posy[i] || posy[boat] >= posy[i] + length[i]) return true;
+                if (posy[boat] + length[boat] <= posy[i] || posy[boat] >= posy[i] + length[i]) continue;
 
                 for (int j = 0; j < width[boat]; j++)
                 {
-                    //MessageBox.Show(j +" + " + posx[moving]+ " >= " + posx[i]+" + " + 1 + " && "+ j +" + " + posx[moving] + " <= " + posx[i] +" + " + width[i] );
                     if (j + posx[boat] >= posx[i] && j + posx[boat] < posx[i] + width[i] && i != boat)
                         return false;
                 }
@@ -472,16 +460,17 @@ namespace BattleShip
 
             for (int i = 0; i < posx.Length; i++)
             {
-                if (posx[boat] + width[boat] <= posx[i] || posx[boat] >= posx[i] + width[i]) return true;
+                if (posx[boat] + width[boat] <= posx[i] || posx[boat] >= posx[i] + width[i]) continue;
 
                 for (int j = 0; j < length[boat]; j++)
                 {
-                    //MessageBox.Show(j +" + " + posy[moving]+ " >= " + posy[i]+" + " + " && "+ j +" + " + posy[moving] + " <= " + posy[i] +" + " + length[i] );
-                    if (j + posy[boat] >= posy[i] && j + posy[boat] < posy[i] + length[i] && i != boat)
+                     if (j + posy[boat] >= posy[i] && j + posy[boat] < posy[i] + length[i] && i != boat)
                         return false;
                 }
             }
             return true; //if all tests fail, return true
         }
-    }
+
+		
+	}
 }
