@@ -45,6 +45,7 @@ namespace BattleShip
                 /* Deep-copy */
                 this.playerShips[i] = new Ship(playerShips[i]);
             }
+            this.aiShips = new Ship[aiShips.Length];
             for (int i = 0; i < aiShips.Length; i++)
             {
                 if (aiShips[i] == null)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
-    class Square
+    public class Square
     {
         private readonly int xCoordinate;
         private readonly int yCoordinate;

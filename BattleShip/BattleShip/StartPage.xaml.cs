@@ -72,12 +72,12 @@ namespace BattleShip
 
 		private void newBtn_Click(object sender, RoutedEventArgs e)
 		{
-			goToBoatPlacement(new object());
+			goToBoatPlacement(new StartPageData(nameTxt.Text));
 			//new game code
 		}
 		private void continueBtn_Click(object sender, RoutedEventArgs e)
 		{
-			goToGame(new object());
+			goToGame(nameTxt.Text + ".ser");
 			//load game code
 		}
 	}
