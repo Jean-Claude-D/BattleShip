@@ -20,9 +20,13 @@ namespace BattleShip
     /// </summary>
     public partial class ScoreBoard : Page
     {
-        public ScoreBoard(GamePageData previousGame)
+        readonly GamePageData gamePageData;
+        int score;
+        public ScoreBoard(GamePageData previousGame, int score)
         {
             InitializeComponent();
+            gamePageData = previousGame;
+            this.score = score;
         }
 
         private void newBtn_Click(object sender, RoutedEventArgs e)
@@ -34,5 +38,13 @@ namespace BattleShip
         {
             this.NavigationService.Navigate(new StartPage());
         }
+
+      
+
+        private void quitgame_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.exit();
+        }
+
     }
 }

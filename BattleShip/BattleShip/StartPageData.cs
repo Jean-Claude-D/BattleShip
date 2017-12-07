@@ -15,12 +15,16 @@ namespace BattleShip
         public StartPageData(string playerName)
         {
             /* A null, or empty or whitespaces filled string is rejected */
-            if(playerName == null || playerName.Trim().Length == 0)
+            if (playerName == null || playerName.Trim().Length == 0 || playerName.Length > 20)
             {
-				this.playerName = "No name";
+                this.playerName = "Mr. No Name";
 
-			}
-            this.playerName = playerName;
+            }
+            else
+            {
+                this.playerName = playerName;
+            }
+
         }
 
         /* Getter for playerName */
