@@ -122,13 +122,13 @@ namespace BattleShip
             battleGrid_Copy.IsEnabled = false;
             for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
             {
-                aiBoard.placeShip(new Ship(boardPlacementData.getAiShip()[i]));
+                aiBoard.placeShip(new Ship(boardPlacementData.getAiShip()[i].position));
             }
 
             Board playerBoard = new Board(battleGrid);
             for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
             {
-                playerBoard.placeShip(new Ship(boardPlacementData.getPlayerShip()[i]));
+                playerBoard.placeShip(new Ship(boardPlacementData.getPlayerShip()[i].position));
             }
 
             this.gamePageData = new GamePageData(boardPlacementData, 0, 0, 0, 0, playerBoard, aiBoard, ai);
