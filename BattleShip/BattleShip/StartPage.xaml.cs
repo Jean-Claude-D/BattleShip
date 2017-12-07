@@ -37,7 +37,7 @@ namespace BattleShip
 		private void goToGame(string playerFileName)
 		{
             //Load and deserialize file at playerFileName
-			this.NavigationService.Navigate(PlayerDB.getDB().loadGame(playerFileName));
+			this.NavigationService.Navigate(new Game(PlayerDB.getDB().loadGame(playerFileName)));
 		}
 
         /**

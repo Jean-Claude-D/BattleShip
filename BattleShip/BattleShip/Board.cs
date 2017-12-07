@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace BattleShip
 {
-    
+    [Serializable]
     public class Board
     {
         /* 2D array of all the squares */
@@ -111,24 +111,19 @@ namespace BattleShip
             {
                 for (int j = 0; j < this.squares.GetLength(1); j++)
                 {
-                    bool ship = this.squares[j, i].isShip();
                     bool shot = this.squares[j, i].isShot();
 
-                    if (!ship && !shot)
+                    /* Only show if the square was ever shot */
+                    if(shot)
                     {
-                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "";
-                    }
-                    else if (!ship && shot)
-                    {
-                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "X";
-                    }
-                    else if (ship && !shot)
-                    {
-                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "O";
-                    }
-                    else
-                    {
-                        if (this.squares[j, i].hasShipSunk())
+                        ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
+
+                        bool ship = this.squares[j, i].isShip();
+                        if(!ship)
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "X";
+                        }
+                        else if(this.squares[j, i].hasShipSunk())
                         {
                             ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "-";
                         }
@@ -136,6 +131,7 @@ namespace BattleShip
                         {
                             ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "Q";
                         }
+
                     }
                 }
             }
@@ -220,9 +216,9 @@ namespace BattleShip
             Square[] avail = new Square[available / 2];
             int k = 0;
 
-            for (int i = 0; i < this.squares.Length; i++)
+            for (int i = 0; i < this.squares.GetLength(0); i++)
             {
-                for (int j = i % 2 == 0 ? 0 : 1; j < this.squares.Length; j+=2)
+                for (int j = i % 2 == 0 ? 0 : 1; j < this.squares.GetLength(1); j+=2)
                 {
                     if (!this.squares[i, j].isShot())
                     {

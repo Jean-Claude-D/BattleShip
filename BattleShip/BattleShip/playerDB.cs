@@ -51,7 +51,19 @@ namespace BattleShip
             foreach (string file in allFiles)
             {
                 /* Remember, files are saved as ('player name' + '.ser') */
-                if((playerName + ".ser").Equals(file))
+                if((this.dirPath + "\\" + playerName + ".ser").Equals(file))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool isPlayerSavedInList(string playerName)
+        {
+            foreach(GamePageData game in this.saves)
+            {
+                if(game.boardPlacementData.GetStartPageData().getPlayerName().Equals(playerName))
                 {
                     return true;
                 }
@@ -76,6 +88,11 @@ namespace BattleShip
         
         public void saveGame(GamePageData save)
         {
+            /* If there is already a save, remove it*/
+            if(this.isPlayerSavedInList(save.boardPlacementData.GetStartPageData().getPlayerName()))
+            {
+                this.saves.Remove(save);
+            }
             this.saves.Add(save);
         }
 
@@ -85,7 +102,7 @@ namespace BattleShip
             foreach (GamePageData save in this.saves)
             {
                 /* Saves the GamePageData at save's player's named file */
-                SerializeUtilities<GamePageData>.Serialize(save, save.boardPlacementData.GetStartPageData().getPlayerName() + ".ser");
+                SerializeUtilities<GamePageData>.Serialize(save, this.dirPath + "\\" + save.boardPlacementData.GetStartPageData().getPlayerName() + ".ser");
             }
         }
     }

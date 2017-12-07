@@ -37,6 +37,34 @@ namespace BattleShip
             /* Because after serialization, Grid are not shallow copied */
             this.gamePageData.playerBoard.grid = battleGrid;
             this.gamePageData.aiBoard.grid = battleGrid_Copy;
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Button inGrid = new Button();
+                    inGrid.Click += Button_Click;
+
+                    battleGrid.Children.Add(inGrid);
+                    Grid.SetRow(inGrid, i);
+                    Grid.SetColumn(inGrid, j);
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Button inGrid = new Button();
+
+                    battleGrid_Copy.Children.Add(inGrid);
+                    Grid.SetRow(inGrid, i);
+                    Grid.SetColumn(inGrid, j);
+                }
+            }
+
+            this.gamePageData.playerBoard.updateGrid();
+            this.gamePageData.aiBoard.updateGrid();
         }
 
         public Game(BoardPlacementData boardPlacementData)
@@ -192,9 +220,10 @@ namespace BattleShip
                            
                         }
 
-                        ((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
-
                         this.gamePageData.playerBoard.updateGrid();
+
+                        /* Reset the idle counter */
+                        this.currIdleTimeLeft = this.gamePageData.boardPlacementData.getIdleTime();
 
                         aiMove();
                     }
@@ -233,7 +262,12 @@ namespace BattleShip
         /* Checks the winning condition for each Board */
         private void checkWin()
         {
-            if (this.gamePageData.aiBoard.isAllShipSunk() || this.gamePageData.playerBoard.isAllShipSunk())
+            if (this.gamePageData.aiBoard.isAllShipSunk())
+            {
+                MessageBox.Show("You lost");
+                goToScore();
+            }
+            else if(this.gamePageData.playerBoard.isAllShipSunk())
             {
                 
                 MessageBox.Show("Win");
@@ -300,6 +334,16 @@ namespace BattleShip
         {
             this.gamePageData.setTime(this.currTimeSec, this.currTimeMin, this.currTimeHour);
             this.gamePageData.setTurnCount(this.turnCount);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Quit();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            reset();
         }
     }
 }
