@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    [Serializable]
     /* Groups all data necessary to save&load a game of battleship */
     public sealed class GamePageData
     {

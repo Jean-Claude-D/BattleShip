@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    [Serializable]
     public enum AiLevel
     {
         EASY, MEDIUM, HARD
     }
 
+    [Serializable]
     public abstract class Ai : Player
     {
         public abstract Square MakeMove(Board board);
@@ -39,7 +41,7 @@ namespace BattleShip
                 {
                     if (board.IsShipShotNotSunk(i, j))
                     {
-                        if (i + 1 < squares.Length && board.IsShipShotNotSunk(i + 1, j))
+                        if (i + 1 < squares.GetLength(0) && board.IsShipShotNotSunk(i + 1, j))
                         {
                             int index = i + 2;
                             while (index < squares.Length && board.IsShipShotNotSunk(index, j))
@@ -59,7 +61,7 @@ namespace BattleShip
                             return squares[index, j];
                         }
 
-                        if (j + 1 < squares.Length && board.IsShipShotNotSunk(i, j + 1))
+                        if (j + 1 < squares.GetLength(1) && board.IsShipShotNotSunk(i, j + 1))
                         {
                             int index = j + 2;
                             while (index < squares.Length && board.IsShipShotNotSunk(i, index))
@@ -86,6 +88,7 @@ namespace BattleShip
 
     }
 
+    [Serializable]
     public class Easy : Ai
     {
         /**
@@ -99,7 +102,7 @@ namespace BattleShip
         }
     }
 
-
+    [Serializable]
     public class Medium : Ai
     {
         /**
@@ -121,6 +124,7 @@ namespace BattleShip
         }
     }
 
+    [Serializable]
     public class Hard : Ai
     {
         /**

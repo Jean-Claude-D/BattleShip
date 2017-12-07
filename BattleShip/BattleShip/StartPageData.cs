@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    [Serializable]
     /* Holds the data collected by StartPage, will be passed onto BoardPlacement*/
     public sealed class StartPageData
     {
