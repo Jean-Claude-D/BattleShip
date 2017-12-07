@@ -9,6 +9,10 @@ using System.Windows.Media.Animation;
 
 namespace BattleShip
 {
+    /*Animation code found online.
+     *This is not our code. 
+     * 
+     */
     class Animations
     {
      

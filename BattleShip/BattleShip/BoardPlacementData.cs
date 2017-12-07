@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 namespace BattleShip
 {
     [Serializable]
+    /*Author: Jean-Claude
+     *Summary: Contains information about the game
+     * 
+     * 
+     */
     public sealed class BoardPlacementData
     {
         private readonly StartPageData startPageData;

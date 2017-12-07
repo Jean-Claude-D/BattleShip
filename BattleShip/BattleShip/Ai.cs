@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+
     [Serializable]
     public enum AiLevel
     {

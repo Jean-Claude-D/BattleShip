@@ -9,6 +9,10 @@ using System.Windows.Controls;
 namespace BattleShip
 {
     [Serializable]
+    /*Summary: Contains all the information of the board in regards to
+     * the positionning of ships 
+     * 
+     */
     public class Board
     {
         /* 2D array of all the squares */
@@ -17,9 +21,6 @@ namespace BattleShip
 
         int available = 100;
         [NonSerialized]  public Grid grid;
-        /* ji = (j * 10) + i */
-        /* j = (int)(ji / 10)*/
-        /* i = ji - j*/
         public Board(Grid grid)
         {
             int numX = BoardLimit.Get().maxX() - BoardLimit.Get().minX() + 1;
@@ -95,9 +96,17 @@ namespace BattleShip
         {
             foreach(Square s in this.squares)
             {
-                if(s.Equals(square))
+                bool temp;
+                if (s.Equals(square))
                 {
-                    bool temp = s.shoot();
+                    try
+                    {
+                        temp = s.shoot();
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        return false;
+                    }
                     available--;
                     return temp;
                 }

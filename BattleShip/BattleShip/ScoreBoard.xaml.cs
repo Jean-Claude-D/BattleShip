@@ -21,7 +21,12 @@ namespace BattleShip
     public partial class ScoreBoard : Page
     {
         ScoreDB db;
-
+        /*Author: Jean-Clause
+         *Class that takes all user information that needs to be saved in the leaderboard
+         *and saves it.
+         * 
+         * 
+         */ 
         public ScoreBoard(GamePageData previousGame, int score)
         {
             InitializeComponent();

@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    /*Author: Jean-Clause
+     *Summary: A database of past players
+     * 
+     * 
+     */ 
     public sealed class PlayerDB
     {
         private string dirPath;

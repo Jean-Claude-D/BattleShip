@@ -148,13 +148,13 @@ namespace BattleShip
         /* Text displayed when the user wins @author Jean-Claude*/
         public static void youWin(TextBlock textBlock, string name)
         {
-            string victoryText = name + ", you won! I am quite happily surprised.";
+            string victoryText = name + ", you won...Humans 1 Computers 0";
             Animations.TypeWriter(victoryText, textBlock, new TimeSpan(0, 0, 4));
         }
 
         public static void youLost(TextBlock textBlock, string name)
         {
-            string victoryText = "You lost?! I was expecting more, even for someone like you, " + name + ".";
+            string victoryText = "You lost? I calculated a 100% posibility of you losing. I am not surprised , " + name + ".";
             Animations.TypeWriter(victoryText, textBlock, new TimeSpan(0, 0, 4));
         }
 

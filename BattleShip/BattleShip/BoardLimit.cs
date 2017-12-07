@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
+    /*Author: Jean Claude
+     *Summary: Sealed Class that contains limits of board
+     * 
+     * 
+     */
     sealed class BoardLimit
     {
         private int MAX_X_COORDINATE;
