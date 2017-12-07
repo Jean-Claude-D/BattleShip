@@ -163,19 +163,15 @@ namespace BattleShip
             Square[,] squares = board.AllSquares();
             
             Square square = isShotNext(board, i, j, 1, 0);
-     
             if (square == null)
             {
-                square = isShotNext(board, i, j, -1, 0);
-                
+                square = isShotNext(board, i, j, -1, 0);                
                 if (square == null)
                 {
-                    square = isShotNext(board, i, j, 0, 1);
-                    
+                    square = isShotNext(board, i, j, 0, 1);                    
                     if (square == null)
                     {
                         square = isShotNext(board, i, j, 0, -1);
-
                         if (square == null)
                         {
                             square = NoShipNext(board, i, j);
@@ -187,22 +183,21 @@ namespace BattleShip
                     }
                     else if (square.Equals(squares[i, j]))
                     {
-                        square = helper(board, i, j, 0, -1);
+                        square = helper(board, i, j, 0, 1);
                     }
                 }
                 else if (square.Equals(squares[i, j]))
                 {
-                    square = helper(board, i, j, 0, 1);
+                    square = helper(board, i, j, -1, 0);
                 }
             }
             else if (square.Equals(squares[i, j]))
             {
-                square = helper(board, i, j, -1, 0);
+                square = helper(board, i, j, 1, 0);
             }
             return square;        
         }
-
-       // helper(board, i + addi, j + addj, addi, addj);
+       
         /**
          * 
          **/
@@ -214,7 +209,7 @@ namespace BattleShip
                    && (i + addi >= 0) && (j + addj >= 0)
 
                    && board.IsShipShotNotSunk(i + addi, j + addj))
-            {
+            {               
                 return squares[i,j];
             }
             return null;
