@@ -16,7 +16,7 @@ namespace BattleShip
         EASY, MEDIUM, HARD
     }
 
-    abstract class Ai : Player
+    public abstract class Ai : Player
     {
         public abstract Square MakeMove(Board board);
 
@@ -50,108 +50,6 @@ namespace BattleShip
 			return null;
 		}
 
-        /**
-         * 
-         **/
-        /*   public Square finishShip(Board board)
-			   {
-				   Square[,] squares = board.AllSquares();
-
-				   //SIMPLIFY
-				   for (int i = 0; i < squares.GetLength(0); i++)
-				   {
-					   //Console.Write(squares[i, i].ToString());
-					   for (int j = 0; j < squares.GetLength(1); j++)
-					   {
-						   //Console.Write(squares[i, j].ToString());
-						   if (board.IsShipShotNotSunk(i, j))
-						   {
-							   int indexi = i;
-							   int indexj = j;
-							   //Console.Write(squares[i, j].ToString());
-
-							   if (i + 1 < squares.GetLength(0) && board.IsShipShotNotSunk(i + 1, j))
-							   {
-								   indexi = i + 1;
-								   while (indexi + 1 < squares.GetLength(0) && board.IsShipShotNotSunk(indexi - 1, j))
-								   {
-									   Console.Write(squares[indexi, j].ToString());
-									   indexi++;
-								   }                           
-								   return squares[indexi, j];
-							   }
-							   if (indexi != i || indexj != j)
-							   {
-								   return squares[indexi, indexj];
-							   }
-
-							   if (i - 1 >= 0 && board.IsShipShotNotSunk(i - 1, j))
-							   {
-								   indexi = i - 1;
-								   while (indexi - 1 >= 0 && board.IsShipShotNotSunk(indexi - 1, j))
-								   {
-									   indexi--;
-								   }
-								   return squares[indexi, j];
-							   }
-
-							   if (indexi != i || indexj != j)
-								   {
-									   return squares[indexi, indexj];
-								   }
-
-							   if (j + 1 < squares.GetLength(1) && board.IsShipShotNotSunk(i, j + 1))
-
-							   {
-								   indexj = j + 1;
-
-								   while (indexj + 1 < squares.GetLength(1) && board.IsShipShotNotSunk(i, indexj + 1))
-								   {
-
-									   indexj++;
-
-								   }
-
-								   return squares[i, indexj];
-							   }
-
-
-							   if (indexi != i || indexj != j)
-									   {
-										   return squares[indexi, indexj];
-									   }
-
-							   if (j - 1 >= 0 && board.IsShipShotNotSunk(i, j - 1))
-
-							   {
-
-								   indexj = j - 1;
-
-								   while (indexj - 1 >= 0 && board.IsShipShotNotSunk(i, indexj - 1))
-
-								   {
-
-									   indexj--;
-
-								   }
-
-								   return squares[i, indexj];
-
-							   }
-							   if (indexi != i || indexj != j)
-										   {
-											   return squares[indexi, indexj];
-										   }
-
-						   }
-
-					   }
-
-				   }         
-
-			   return null;
-			   }
-			   */
         public Square finishShip(Board board)
         {
             Square ship = findShip(board);
@@ -178,22 +76,22 @@ namespace BattleShip
                         }
                         else if (square.Equals(squares[i, j]))
                         {
-                            square = helper(board, i, j, 0, -1);
+                            square = helper(board, i, j-1, 0, -1);
                         }
                     }
                     else if (square.Equals(squares[i, j]))
                     {
-                        square = helper(board, i, j, 0, 1);
+                        square = helper(board, i, j+1, 0, 1);
                     }
                 }
                 else if (square.Equals(squares[i, j]))
                 {
-                    square = helper(board, i, j, -1, 0);
+                    square = helper(board, i-1, j, -1, 0);
                 }
             }
             else if (square.Equals(squares[i, j]))
             {
-                square = helper(board, i, j, 1, 0);
+                square = helper(board, i, j+1, 1, 0);
             }
             return square;        
         }
@@ -312,5 +210,3 @@ namespace BattleShip
             }
         }
     }
-
-
