@@ -65,8 +65,8 @@ namespace BattleShip
                 }
             }
 
-            this.gamePageData.playerBoard.updateGrid();
-            this.gamePageData.aiBoard.updateGrid();
+            this.gamePageData.PlayerBoard.updateGrid();
+            this.gamePageData.AiBoard.updateGrid();
         }
 
         public Game(BoardPlacementData boardPlacementData)
@@ -215,14 +215,14 @@ namespace BattleShip
                 {
                     if (((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Equals((Button)sender))
                     {
-                        if (this.gamePageData.playerBoard.shoot(new Square(j, i)) && !firstship)
+                        if (this.gamePageData.PlayerBoard.shoot(new Square(j, i)) && !firstship)
                         {
                            Narrator.shipdown(NarratorTxt, null);
                             firstship = true;
                            
                         }
 
-                        this.gamePageData.playerBoard.updateGrid();
+                        this.gamePageData.PlayerBoard.updateGrid();
 
                         /* Reset the idle counter */
                         this.currIdleTimeLeft = this.gamePageData.boardPlacementData.getIdleTime();
@@ -254,8 +254,8 @@ namespace BattleShip
 
             idleTimeDispatcher.Stop();
             battleGrid.IsEnabled = false;
-            this.gamePageData.aiBoard.shoot(this.gamePageData.ai.MakeMove(this.gamePageData.aiBoard));
-            this.gamePageData.aiBoard.updateGrid();
+            this.gamePageData.AiBoard.shoot(this.gamePageData.Ai.MakeMove(this.gamePageData.AiBoard));
+            this.gamePageData.AiBoard.updateGrid();
             turnCount++;
             battleGrid.IsEnabled = true;
             idleTimeDispatcher.Start();
@@ -264,7 +264,7 @@ namespace BattleShip
         /* Checks the winning condition for each Board */
         private void checkWin()
         {
-            if (this.gamePageData.aiBoard.isAllShipSunk() || this.gamePageData.playerBoard.isAllShipSunk())
+            if (this.gamePageData.AiBoard.isAllShipSunk() || this.gamePageData.PlayerBoard.isAllShipSunk())
             {
                 goToScore();
             }
@@ -319,7 +319,7 @@ namespace BattleShip
                 multiplier = 1;
             }
             /* Loser gets a score of 0 */
-            return (100000000/multiplier- (1*turnCount)) * ((this.gamePageData.aiBoard.isAllShipSunk()) ? (0) : (1));
+            return (100000000/multiplier- (1*turnCount)) * ((this.gamePageData.AiBoard.isAllShipSunk()) ? (0) : (1));
         }
 
         private void updateGamePageData()
@@ -342,10 +342,10 @@ namespace BattleShip
         {
             if(cheatTxt.Text.Equals(MAGIC_WORDS))
             {
-                this.gamePageData.playerBoard.isGodMode = true;
+                this.gamePageData.PlayerBoard.isGodMode = true;
             }
 
-            this.gamePageData.playerBoard.updateGrid();
+            this.gamePageData.PlayerBoard.updateGrid();
         }
     }
 }
