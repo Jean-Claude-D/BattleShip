@@ -32,7 +32,6 @@ namespace BattleShip
         public static void exit()
         {
             PlayerDB.getDB().saveDB();
-            MessageBox.Show("Wait a bit...");
             System.Windows.Application.Current.Shutdown();
         }
 

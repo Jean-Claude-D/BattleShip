@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -120,13 +121,13 @@ namespace BattleShip
             battleGrid_Copy.IsEnabled = false;
             for (int i = 0; i < boardPlacementData.getAiShip().Length; i++)
             {
-                aiBoard.placeShip(boardPlacementData.getAiShip()[i]);
+                aiBoard.placeShip(new Ship(boardPlacementData.getAiShip()[i]));
             }
 
             Board playerBoard = new Board(battleGrid);
             for (int i = 0; i < boardPlacementData.getPlayerShip().Length; i++)
             {
-                playerBoard.placeShip(boardPlacementData.getPlayerShip()[i]);
+                playerBoard.placeShip(new Ship(boardPlacementData.getPlayerShip()[i]));
             }
 
             this.gamePageData = new GamePageData(boardPlacementData, 0, 0, 0, 0, playerBoard, aiBoard, ai);
@@ -262,17 +263,9 @@ namespace BattleShip
         /* Checks the winning condition for each Board */
         private void checkWin()
         {
-            if (this.gamePageData.aiBoard.isAllShipSunk())
+            if (this.gamePageData.aiBoard.isAllShipSunk() || this.gamePageData.playerBoard.isAllShipSunk())
             {
-                MessageBox.Show("You lost");
                 goToScore();
-            }
-            else if(this.gamePageData.playerBoard.isAllShipSunk())
-            {
-                
-                MessageBox.Show("Win");
-                goToScore();
-               
             }
         }
 
@@ -324,10 +317,8 @@ namespace BattleShip
             {
                 multiplier = 1;
             }
-
-
-
-            return (100000000/multiplier- (1*turnCount));
+            /* Loser gets a score of 0 */
+            return (100000000/multiplier- (1*turnCount)) * ((this.gamePageData.aiBoard.isAllShipSunk()) ? (0) : (1));
         }
 
         private void updateGamePageData()

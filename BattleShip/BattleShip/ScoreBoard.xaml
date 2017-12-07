@@ -10,8 +10,9 @@
 
     <Grid SnapsToDevicePixels="True" ClipToBounds="True" Background="#FF000017">
         <Button x:Name="quitBtn" Content="Quit" HorizontalAlignment="Left" Margin="623,418,0,0" VerticalAlignment="Top" Width="106" Height="20" Click="quitgame_Click"/>
-        <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="152,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="210" Width="577" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
+        <TextBlock x:Name="msgTxt" HorizontalAlignment="Left" Margin="152,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="210" Width="325" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
         <Button x:Name="newBtn" Content="New Game" HorizontalAlignment="Left" Margin="495,418,0,0" VerticalAlignment="Top" Width="106" Click="newBtn_Click" Height="20"/>
         <TextBlock Margin="141,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="OCR A Extended" Height="99" Width="609" FontSize="100" Foreground="White" HorizontalAlignment="Left"><Run Text="BATTLESHI"/><Run Text="P"/></TextBlock>
+        <TextBlock x:Name="narrTxt" HorizontalAlignment="Left" Margin="495,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="210" Width="234" FontWeight="Thin" Foreground="White" FontSize="16" FontFamily="OCR A Std"/>
     </Grid>
 </Page>

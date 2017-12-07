@@ -20,13 +20,34 @@ namespace BattleShip
     /// </summary>
     public partial class ScoreBoard : Page
     {
-        readonly GamePageData gamePageData;
-        int score;
+        ScoreDB db;
+
         public ScoreBoard(GamePageData previousGame, int score)
         {
             InitializeComponent();
-            gamePageData = previousGame;
-            this.score = score;
+
+            if(score == 0)
+            {
+                Narrator.youLost(narrTxt, previousGame.boardPlacementData.GetStartPageData().getPlayerName());
+            }
+            else
+            {
+                Narrator.youWin(narrTxt, previousGame.boardPlacementData.GetStartPageData().getPlayerName());
+            }
+
+            db = ScoreDB.getDB();
+
+            //Add the previous game to the scores
+            db.records.Add(new ScoreRecord(previousGame.boardPlacementData.GetStartPageData().getPlayerName(), score));
+            db.records.Sort();
+
+            string scoreTable = "";
+            for(int i = 0; i < 10 && i < db.records.Count; i++)
+            {
+                scoreTable += (i + 1) + ". " + db.records.ElementAt(i).ToString() + "\n";
+            }
+
+            msgTxt.Text = scoreTable;
         }
 
         private void newBtn_Click(object sender, RoutedEventArgs e)
@@ -38,8 +59,6 @@ namespace BattleShip
         {
             this.NavigationService.Navigate(new StartPage());
         }
-
-      
 
         private void quitgame_Click(object sender, RoutedEventArgs e)
         {

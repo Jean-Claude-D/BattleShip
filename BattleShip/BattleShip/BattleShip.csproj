@@ -69,6 +69,7 @@
     <Compile Include="ScoreBoard.xaml.cs">
       <DependentUpon>ScoreBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScoreRecord.cs" />
     <Compile Include="SerializeUtilities.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Square.cs" />
