@@ -11,7 +11,7 @@ namespace BattleShip
 {
     class Animations
     {
-        //I copied this online. :)
+     
         public static void TypeWriter(string textToAnimate, TextBlock txt, TimeSpan timeSpan)
         {
             Storyboard story = new Storyboard();
@@ -36,7 +36,7 @@ namespace BattleShip
             story.Begin(txt);
         }
 
-        //fuck you
+       
         private void TypeWriter(string text, TextBlock txt)
         {
             for (int i = 0; i < text.Length; i++)
