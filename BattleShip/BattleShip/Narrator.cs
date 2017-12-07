@@ -145,5 +145,18 @@ namespace BattleShip
             Animations.TypeWriter(text, msgTxt, new TimeSpan(0, 0, 4));
         }
 
+        /* Text displayed when the user wins @author Jean-Claude*/
+        public static void youWin(TextBlock textBlock, string name)
+        {
+            string victoryText = name + ", you won! I am quite happily surprised.";
+            Animations.TypeWriter(victoryText, textBlock, new TimeSpan(0, 0, 4));
+        }
+
+        public static void youLost(TextBlock textBlock, string name)
+        {
+            string victoryText = "You lost?! I was expecting more, even for someone like you, " + name + ".";
+            Animations.TypeWriter(victoryText, textBlock, new TimeSpan(0, 0, 4));
+        }
+
     }
 }
