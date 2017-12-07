@@ -21,6 +21,7 @@ namespace BattleShip
         private Boolean firstship = false;
         private Boolean silence = false;
         private int turnCount; //incremented in aiMove, because AI will always play
+        private readonly string MAGIC_WORDS = "Praise Nagi";
 
         public Game(GamePageData gamePageData)
         {
@@ -344,6 +345,16 @@ namespace BattleShip
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             reset();
+        }
+
+        private void cheatTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(cheatTxt.Text.Equals(MAGIC_WORDS))
+            {
+                this.gamePageData.playerBoard.isGodMode = true;
+            }
+
+            this.gamePageData.playerBoard.updateGrid();
         }
     }
 }
