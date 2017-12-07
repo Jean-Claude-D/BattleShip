@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip
 {
-    public class ScoreRecord
+    public class ScoreRecord : IComparable
     {
         public string playerName;
         public int score;
@@ -21,6 +21,22 @@ namespace BattleShip
         public override string ToString()
         {
             return "[" + playerName + "] : " + score + ((this.score > 1) ? (" pts") : (" pt"));
+        }
+
+        public int CompareTo(object obj)
+        {
+            if(this.score > ((ScoreRecord)obj).score)
+            {
+                return 1;
+            }
+            else if(this.score == ((ScoreRecord)obj).score)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 

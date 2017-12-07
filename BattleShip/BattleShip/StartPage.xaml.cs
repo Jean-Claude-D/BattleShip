@@ -49,8 +49,6 @@ namespace BattleShip
         {
             string name = nameTxt.Text;
 
-            Narrator.displayNameFoundSaved(msgTxt, name);
-
             nameTxt.Visibility = Visibility.Hidden;
             sendBtn.Visibility = Visibility.Hidden;
             newBtn.Visibility = Visibility.Visible;
@@ -58,7 +56,12 @@ namespace BattleShip
 
             if (PlayerDB.getDB().isPlayerExist(name))
             {
+                Narrator.displayNameFoundSaved(msgTxt, name);
                 continueBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Narrator.newName(msgTxt, name);
             }
 		}
 
