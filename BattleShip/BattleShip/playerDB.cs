@@ -85,15 +85,16 @@ namespace BattleShip
             throw new Exception(playerName + " has no saved game");
         }
 
-        
+
         public void saveGame(GamePageData save)
         {
             /* If there is already a save, remove it*/
-            if(this.isPlayerSavedInList(save.boardPlacementData.GetStartPageData().getPlayerName()))
+            if (this.isPlayerSavedInList(save.boardPlacementData.GetStartPageData().getPlayerName()))
             {
                 this.saves.Remove(save);
             }
             this.saves.Add(save);
+
         }
 
         public void saveDB()
