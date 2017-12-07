@@ -13,6 +13,7 @@ namespace BattleShip
     {
         /* 2D array of all the squares */
         private Square[,] squares;
+        public bool isGodMode = false;
 
         int available = 100;
         [NonSerialized]  public Grid grid;
@@ -112,13 +113,13 @@ namespace BattleShip
                 for (int j = 0; j < this.squares.GetLength(1); j++)
                 {
                     bool shot = this.squares[j, i].isShot();
+                    bool ship = this.squares[j, i].isShip();
 
                     /* Only show if the square was ever shot */
-                    if(shot)
+                    if (shot)
                     {
                         ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
 
-                        bool ship = this.squares[j, i].isShip();
                         if(!ship)
                         {
                             ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "X";
@@ -132,6 +133,13 @@ namespace BattleShip
                             ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "Q";
                         }
 
+                    }
+                    else if(isGodMode)
+                    {
+                        if(ship)
+                        {
+                            ((Button)this.grid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Content = "O";
+                        }
                     }
                 }
             }
