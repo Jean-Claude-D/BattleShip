@@ -36,7 +36,7 @@
                 </Grid.RowDefinitions>
             </Grid>
         </Border>
-        <Border  BorderBrush="Black" BorderThickness="2" Margin="517,97,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="320" >
+        <Border  BorderBrush="Black" BorderThickness="2" Margin="517,102,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="320" >
             <Grid x:Name="battleGrid_Copy" ShowGridLines="True" Margin="0" Height="320" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Background="#FF0A0036">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -65,8 +65,8 @@
             </Grid>
         </Border>
         <Label x:Name="timer" HorizontalAlignment="Left" Margin="468,422,0,0" Content="" VerticalAlignment="Top" Height="40" Width="143" FontSize="20" Foreground="White" FontFamily="OCR A Std"/>
-        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="731,431,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
-        <Button Content="Restart" HorizontalAlignment="Left" Margin="616,431,0,0" VerticalAlignment="Top" Width="94" Height="26" />
-        <TextBlock HorizontalAlignment="Left" Margin="495,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="336" FontSize="14" RenderTransformOrigin="-0.598,-0.178" TextAlignment="Right" Foreground="White" FontFamily="OCR A Std" Text="choose a level, timer time and stuff and place your shit"/>
+        <Button Content="Save/Quit" HorizontalAlignment="Left" Margin="731,436,0,0" VerticalAlignment="Top" Width="101" Height="26"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="616,436,0,0" VerticalAlignment="Top" Width="94" Height="26" />
+        <TextBlock x:Name="NarratorTxt" HorizontalAlignment="Left" Margin="468,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="87" Width="400" FontSize="13" RenderTransformOrigin="-0.598,-0.178" Foreground="White" FontFamily="OCR A Std" Text=""/>
     </Grid>
 </Page>

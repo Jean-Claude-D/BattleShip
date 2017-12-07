@@ -14,11 +14,12 @@ namespace BattleShip
         readonly GamePageData gamePageData;
         DispatcherTimer idleTimeDispatcher;
         private int currIdleTimeLeft;
-
+        String level;
         private int currTimeSec; //With the DispatcherTimer
         private int currTimeMin; //With the DispatcherTimer
         private int currTimeHour; //With the DispatcherTimer
-
+        private Boolean firstship = false;
+        private Boolean silence = false;
         private int turnCount; //incremented in aiMove, because AI will always play
 
         public Game(GamePageData gamePageData)
@@ -42,6 +43,7 @@ namespace BattleShip
         {
 
             InitializeComponent();
+            Narrator.startplaying(NarratorTxt, null);
 
             for (int i = 0; i < 10; i++)
             {
@@ -69,6 +71,8 @@ namespace BattleShip
             }
 
             Ai ai;
+               level = boardPlacementData.getLevel().ToString();
+           
             switch (boardPlacementData.getLevel())
             {
                 case AiLevel.EASY:
@@ -124,6 +128,7 @@ namespace BattleShip
             {
                 /* ... Let the AI play*/
                 aiMove();
+                if (turnCount<5 && !silence) Narrator.timedout(NarratorTxt, null);
                 /* Reset the idleTime counter */
                 this.currIdleTimeLeft = this.gamePageData.boardPlacementData.getIdleTime();
             }
@@ -180,7 +185,12 @@ namespace BattleShip
                 {
                     if (((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).Equals((Button)sender))
                     {
-                        this.gamePageData.playerBoard.shoot(new Square(j, i));
+                        if (this.gamePageData.playerBoard.shoot(new Square(j, i)) && !firstship)
+                        {
+                           Narrator.shipdown(NarratorTxt, null);
+                            firstship = true;
+                           
+                        }
 
                         ((Button)battleGrid.Children.Cast<UIElement>().First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j)).IsEnabled = false;
 
@@ -196,6 +206,21 @@ namespace BattleShip
         /* The ai plays a move can be called by Button_Click and when the user's idle time is over */
         private void aiMove()
         {
+            if (turnCount == 0)
+            {
+                Narrator.firstturn(NarratorTxt, null);
+            }
+            else if (turnCount == 1)
+            {
+                Narrator.secondturn(NarratorTxt, null);
+                
+            }
+            else if (turnCount>10 && !silence)
+            {
+                Narrator.normal(NarratorTxt, null);
+                silence = true;
+            }
+
             idleTimeDispatcher.Stop();
             battleGrid.IsEnabled = false;
             this.gamePageData.aiBoard.shoot(this.gamePageData.ai.MakeMove(this.gamePageData.aiBoard));
@@ -210,8 +235,10 @@ namespace BattleShip
         {
             if (this.gamePageData.aiBoard.isAllShipSunk() || this.gamePageData.playerBoard.isAllShipSunk())
             {
-                /* This is temp, will need to go to score page */
+                
                 MessageBox.Show("Win");
+                goToScore();
+               
             }
         }
 
@@ -243,7 +270,30 @@ namespace BattleShip
         {
             /* Writes the correct time and turn count in GamePageData */
             updateGamePageData();
-            this.NavigationService.Navigate(new ScoreBoard(this.gamePageData));
+            
+            this.NavigationService.Navigate(new ScoreBoard(this.gamePageData,generatescore()));
+        }
+
+        private int generatescore()
+        {
+            int multiplier = 0;
+
+            if (level == "EASY")
+            {
+                multiplier = 3;
+            }
+            else if (level == "MEDIUM")
+            {
+                multiplier = 2;
+            }
+            else if (level == "HARD")
+            {
+                multiplier = 1;
+            }
+
+
+
+            return (100000000/multiplier- (1*turnCount));
         }
 
         private void updateGamePageData()
