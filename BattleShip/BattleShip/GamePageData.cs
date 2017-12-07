@@ -19,19 +19,11 @@ namespace BattleShip
         private int turnCount;
 
         /*The Board the player shoots on*/
-        private readonly Board playerBoard;
+        public readonly Board playerBoard;
         /*The Board the ai shoots on*/
-        private readonly Board aiBoard;
+        public readonly Board aiBoard;
 
-        private readonly Ai ai;
-
-        /*The Board the player shoots on*/
-        public Board PlayerBoard2 => playerBoard;
-
-        /*The Board the ai shoots on*/
-        public Board AiBoard => aiBoard;
-
-        public Ai Ai => ai;
+        public readonly Ai ai;
 
         public GamePageData(BoardPlacementData boardPlacementData, int currTimeSec, int currTimeMin, int currTimeHour, int turnCount, Board playerBoard, Board aiBoard, Ai ai)
         {
